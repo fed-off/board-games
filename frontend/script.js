@@ -1,11 +1,27 @@
 const textArea = document.querySelector('textarea');
 
-textArea.addEventListener('input', () => {
-  console.log(textArea.value);
+// WebSocket
+const socket = new WebSocket('ws://localhost:3001');
+
+socket.addEventListener('open', function (event) {
+  console.log('WebSocket connected');
 });
 
-fetch('http://localhost:3000/hello')
-  .then((response) => response.json())
-  .then((data) => {
-    textArea.value = data.message;
-  });
+socket.addEventListener('message', function (event) {
+  console.log('Message from server: ', event.data);
+  textArea.value = event.data;
+});
+
+socket.addEventListener('error', function (event) {
+  console.error('WebSocket error: ', event);
+});
+
+socket.addEventListener('close', function (event) {
+  console.log('WebSocket closed');
+});
+
+
+textArea.addEventListener('input', () => {
+  console.log('textInput:', textArea.value);
+  socket.send(textArea.value);
+});
