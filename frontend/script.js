@@ -1,7 +1,7 @@
 const textArea = document.querySelector('textarea');
 
 // WebSocket
-const socket = new WebSocket('ws://localhost:3001');
+const socket = new WebSocket(`ws://${window.location.hostname}:3001`);
 
 socket.addEventListener('open', function (event) {
   console.log('WebSocket connected');
