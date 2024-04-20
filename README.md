@@ -1,1 +1,3 @@
-# board-games
+# monopoly
+
+- до 6 игроков
