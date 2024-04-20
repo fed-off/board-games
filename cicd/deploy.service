@@ -8,3 +8,6 @@ User=ubuntu
 WorkingDirectory=/home/ubuntu/repo
 ExecStart=/home/ubuntu/repo/cicd/deploy.sh
 Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
