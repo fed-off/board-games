@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SLEEP_SECONDS=10
+SLEEP_SECONDS=60
 
 REPO_DIR="/home/ubuntu/repo"
 cd $REPO_DIR || { echo "Cannot change directory to $REPO_DIR"; exit 1; }
