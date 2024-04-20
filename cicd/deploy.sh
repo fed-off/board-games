@@ -18,6 +18,7 @@ while true; do
     sudo systemctl restart nginx || { echo "Failed to restart nginx"; exit 1; }
     (cd backend && npm install) || { echo "Failed to install npm packages"; exit 1; }
     sudo systemctl restart ws-server || { echo "Failed to restart ws-server"; exit 1; }
+    sudo systemctl restart deploy || { echo "Failed to restart ws-server"; exit 1; }
     echo "Deployment completed."
   fi
 
