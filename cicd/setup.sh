@@ -30,4 +30,3 @@ sudo cp cicd/deploy.service /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl start deploy
 sudo systemctl enable deploy
-
