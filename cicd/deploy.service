@@ -1,0 +1,13 @@
+[Unit]
+Description=Watch git repository for updates and redeploy
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/repo
+ExecStart=/home/ubuntu/repo/cicd/deploy.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

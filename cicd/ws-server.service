@@ -1,0 +1,14 @@
+[Unit]
+Description=Node.js WebSocket Server
+After=network.target
+
+[Service]
+# Environment=NODE_PORT=3001
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/repo/backend
+ExecStart=/usr/bin/node /home/ubuntu/repo/backend/ws-server.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
