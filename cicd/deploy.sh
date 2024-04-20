@@ -9,7 +9,7 @@ while true; do
   git fetch origin || { echo "Failed to fetch from remote repository"; exit 1; }
 
   # Check if there are changes
-  if git diff --quiet HEAD origin/main; then
+  if git diff --quiet HEAD origin/fix-ws-on-remote-server; then
     echo "No changes found."
   else
     echo "Changes found. Deploying the changes..."
