@@ -1,4 +1,4 @@
-const textArea = document.querySelector('textarea');
+const movable = document.querySelector('div#movable');
 
 // WebSocket
 const socket = new WebSocket(`ws://${window.location.hostname}:3001`);
@@ -9,7 +9,11 @@ socket.addEventListener('open', function (event) {
 
 socket.addEventListener('message', function (event) {
   console.log('Message from server: ', event.data);
-  textArea.value = event.data;
+  const message = JSON.parse(event.data);
+  if (message.event === 'move') {
+    movable.style.left = `${message.x}px`;
+    movable.style.top = `${message.y}px`;
+  }
 });
 
 socket.addEventListener('error', function (event) {
@@ -21,7 +25,30 @@ socket.addEventListener('close', function (event) {
 });
 
 
-textArea.addEventListener('input', () => {
-  console.log('textInput:', textArea.value);
-  socket.send(textArea.value);
+// Movable
+movable.addEventListener('mousedown', (event) => {
+  console.log('mousedown:', event);
+  let offsetX = event.clientX - movable.getBoundingClientRect().left;
+  let offsetY = event.clientY - movable.getBoundingClientRect().top;
+
+  function onMouseMove(event) {
+    console.log('mousemove:', event);
+    movable.style.left = `${event.clientX - offsetX}px`;
+    movable.style.top = `${event.clientY - offsetY}px`;
+    socket.send(JSON.stringify({
+      event: 'move',
+      x: event.clientX - offsetX,
+      y: event.clientY - offsetY,
+    }));
+  }
+
+  function onMouseUp(event) {
+    console.log('mouseup:', event);
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+  }
+
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
 });
+

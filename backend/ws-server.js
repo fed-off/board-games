@@ -19,9 +19,6 @@ wss.on('connection', function connection(ws) {
   });
 
 
-
-
-  ws.send('hi from server');
 });
 
 // Функция для отправки сообщения всем клиентам
