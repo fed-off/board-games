@@ -27,6 +27,7 @@ socket.addEventListener('close', function (event) {
 
 // Movable
 movable.addEventListener('mousedown', (event) => {
+  event.preventDefault();
   console.log('mousedown:', event);
   let offsetX = event.clientX - movable.getBoundingClientRect().left;
   let offsetY = event.clientY - movable.getBoundingClientRect().top;
