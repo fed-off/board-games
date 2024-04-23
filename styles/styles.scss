@@ -52,30 +52,75 @@ body {
 
 // _______________________
 // VARIABLES
-$cards-white-space: 40px;
+$little-gap: 20px;
+$middle-gap: 30px;
+$big-gap: 40px;
+
 
 // _______________________
 // BEM STYLES
 .monopoly__container {
   display: flex;
-  gap: $cards-white-space;
+  gap: $big-gap;
   justify-content: space-around;
   height: 100vh;
 }
 
 .monopoly__players {
   flex-grow: 1;
+  flex-shrink: 0;
 
   display: grid;
-  row-gap: $cards-white-space;
+  row-gap: $big-gap;
 }
 
 .monopoly__player {
   display: grid;
-  gap: 10px;
+  align-content: space-around;
+  gap: $little-gap;
   padding: 20px;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+.player {
+  &__info-wrapper {
+    display: flex;
+    justify-content: space-around;
+    gap: $little-gap;
+  }
+
+  &__person-info {
+    display: grid;
+    justify-items: center;
+    justify-content: center;
+    gap: calc($little-gap / 2);
+
+    width: 120px;
+    margin: 0;
+  }
+
+  &__avatar {
+    color: white;
+    background-color: #000;
+    border-radius: 50%;
+  }
+
+  &__name {
+    text-align: center;
+  }
+
+  &__money-info {
+    display: grid;
+    align-content: space-around;
+
+    width: 160px;
+    margin: 0;
+  }
+}
+
+.monopoly__zone-wrapper {
+  flex-shrink: 0;
 }
 
 .monopoly__zone {
