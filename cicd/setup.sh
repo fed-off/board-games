@@ -6,7 +6,9 @@ sudo chmod 440 /etc/sudoers.d/ubuntu
 
 # Install dependencies
 sudo apt update -y
-sudo apt install -y nginx nodejs npm
+sudo apt install -y nginx
+sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+nvm install 21.7.3
 
 # Clone the repository
 cd ~
