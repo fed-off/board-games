@@ -4,6 +4,7 @@ After=network.target
 
 [Service]
 # Environment=NODE_PORT=3001
+Environment=MONGO_PASSWORD=
 Type=simple
 User=ubuntu
 WorkingDirectory=/home/ubuntu/repo/backend
