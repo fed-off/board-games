@@ -34,6 +34,12 @@ button {
   cursor: pointer;
 }
 
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -43,16 +49,33 @@ body {
 .container {
   padding: 20px;
 }
+
+// _______________________
+// VARIABLES
+$cards-white-space: 40px;
+
 // _______________________
 // BEM STYLES
 .monopoly__container {
   display: flex;
-  justify-content: space-between;
+  gap: $cards-white-space;
+  justify-content: space-around;
   height: 100vh;
 }
 
 .monopoly__players {
-  width: auto;
+  flex-grow: 1;
+
+  display: grid;
+  row-gap: $cards-white-space;
+}
+
+.monopoly__player {
+  display: grid;
+  gap: 10px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .monopoly__zone {
@@ -62,4 +85,4 @@ body {
 }
 
 // _______________________
-// ' sass --watch ./styles/styles.scss:./styles/styles.css ' - команда для компиляции
+// ' sass --watch ./styles/styles.scss:./styles/styles.css ' - команда для автоматической компиляции
