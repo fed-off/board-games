@@ -30,6 +30,10 @@ a {
   color: #000;
 }
 
+p {                   // плохо, но удобно
+  margin: 0;
+}
+
 button {
   cursor: pointer;
 }
@@ -47,7 +51,7 @@ body {
 }
 
 .container {
-  padding: 20px;
+  padding: 15px;
 }
 
 // _______________________
@@ -59,38 +63,35 @@ $big-gap: 40px;
 
 // _______________________
 // BEM STYLES
-.monopoly__container {
+.monopoly__container {            // самый родительский блок
   display: flex;
   gap: $big-gap;
-  justify-content: space-around;
+  justify-content: center;
   height: 100vh;
 }
 
-.monopoly__players {
-  flex-grow: 1;
+.monopoly__players {               // список игроков
   flex-shrink: 0;
 
   display: grid;
-  row-gap: $big-gap;
+  gap: $little-gap;
 }
 
-.monopoly__player {
+.player {                          // игрок (карточка)
   display: grid;
-  align-content: space-around;
-  gap: $little-gap;
-  padding: 20px;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.1);
-}
 
-.player {
-  &__info-wrapper {
+  &__info-wrapper {               // обертка для информации об игроке
     display: flex;
     justify-content: space-around;
     gap: $little-gap;
   }
 
-  &__person-info {
+  &__person-info {                // информация об игроке
     display: grid;
     justify-items: center;
     justify-content: center;
@@ -100,33 +101,39 @@ $big-gap: 40px;
     margin: 0;
   }
 
-  &__avatar {
+  &__avatar {                     // аватар игрока
     color: white;
     background-color: #000;
     border-radius: 50%;
   }
 
-  &__name {
+  &__name {                       // имя игрока
     text-align: center;
   }
 
-  &__money-info {
+  &__money-info {                 // информация о деньгах
     display: grid;
-    align-content: space-around;
+    align-content: space-between;
 
     width: 160px;
-    margin: 0;
+  }
+
+  &__place-info {                    // информация о месте
+    width: 320px;
+    text-align: center;
   }
 }
 
-.monopoly__zone-wrapper {
+
+.monopoly__zone-wrapper {            // обертка для зоны
   flex-shrink: 0;
 }
 
-.monopoly__zone {
+.monopoly__zone-img {               // изображение зоны
   height: 100%;
   object-fit: contain;
   background-color: red;
+  border-radius: 10px;
 }
 
 // _______________________
