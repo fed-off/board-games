@@ -102,8 +102,6 @@ $big-gap: 40px;
   }
 
   &__avatar {                     // аватар игрока
-    color: white;
-    background-color: #000;
     border-radius: 50%;
   }
 
@@ -119,8 +117,12 @@ $big-gap: 40px;
   }
 
   &__place-info {                    // информация о месте
-    width: 320px;
+    min-width: 320px;
     text-align: center;
+  }
+
+  &--current {                    // стили для текущего игрока
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
   }
 }
 
