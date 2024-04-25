@@ -1,6 +1,28 @@
 // GLOBAL STYLES
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  white-space: nowrap;
+  -webkit-clip-path: inset(100%);
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 a {
@@ -8,8 +30,18 @@ a {
   color: #000;
 }
 
+p {                   // плохо, но удобно
+  margin: 0;
+}
+
 button {
   cursor: pointer;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 body {
@@ -19,10 +51,92 @@ body {
 }
 
 .container {
-  padding: 20px;
+  padding: 15px;
 }
-// _______________________
-// BEM STYLES
 
 // _______________________
-// ' sass --watch ./styles/styles.scss:./styles/styles.css ' - команда для компиляции
+// VARIABLES
+$little-gap: 20px;
+$middle-gap: 30px;
+$big-gap: 40px;
+
+
+// _______________________
+// BEM STYLES
+.monopoly__container {            // самый родительский блок
+  display: flex;
+  gap: $big-gap;
+  justify-content: center;
+  height: 100vh;
+}
+
+.monopoly__players {               // список игроков
+  flex-shrink: 0;
+
+  display: grid;
+  gap: $little-gap;
+}
+
+.player {                          // игрок (карточка)
+  display: grid;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.1);
+
+  &__info-wrapper {               // обертка для информации об игроке
+    display: flex;
+    justify-content: space-around;
+    gap: $little-gap;
+  }
+
+  &__person-info {                // информация об игроке
+    display: grid;
+    justify-items: center;
+    justify-content: center;
+    gap: calc($little-gap / 2);
+
+    width: 120px;
+    margin: 0;
+  }
+
+  &__avatar {                     // аватар игрока
+    border-radius: 50%;
+  }
+
+  &__name {                       // имя игрока
+    text-align: center;
+  }
+
+  &__money-info {                 // информация о деньгах
+    display: grid;
+    align-content: space-between;
+
+    width: 160px;
+  }
+
+  &__place-info {                    // информация о месте
+    min-width: 320px;
+    text-align: center;
+  }
+
+  &--current {                    // стили для текущего игрока
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
+  }
+}
+
+
+.monopoly__zone-wrapper {            // обертка для зоны
+  flex-shrink: 0;
+}
+
+.monopoly__zone-img {               // изображение зоны
+  height: 100%;
+  object-fit: contain;
+  background-color: red;
+  border-radius: 10px;
+}
+
+// _______________________
+// ' sass --watch ./styles/styles.scss:./styles/styles.css ' - команда для автоматической компиляции
