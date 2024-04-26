@@ -12,6 +12,41 @@
       <h1 class="monopoly__title visually-hidden">Монополия</h1>
       <div class="monopoly__container container">
 
+        <div class="monopoly__form-wrapper overlay">
+          <form class="monopoly__start-form start-form" action="https://echo.htmlacademy.ru/" method="post">
+            <h2 class="start-form__title">Кто будет играть?</h2>
+            <ul class="start-form__players">
+              <li class="start-form__player-selector">
+                <label class="start-form__label">
+                  <input class="start-form__checkbox" type="checkbox" name="barsik" id="barsik-checkbox" checked>
+                  <span class="start-form__player-name start-form__player-name--barsik">Барсик</span>
+                </label>
+              </li>
+              <li class="start-form__player-selector">
+                <label class="start-form__label">
+                  <input class="start-form__checkbox" type="checkbox" name="sharik" id="sharik-checkbox" checked>
+                  <span class="start-form__player-name start-form__player-name--sharik">Шарик</span>
+                </label>
+              </li>
+              <li class="start-form__player-selector">
+                <label class="start-form__label">
+                  <input class="start-form__checkbox" type="checkbox" name="dino" id="sharik-checkbox">
+                  <span class="start-form__player-name start-form__player-name--dino">Тиранозавр</span>
+                </label>
+              </li>
+              <li class="start-form__player-selector">
+                <label class="start-form__label">
+                  <input class="start-form__checkbox" type="checkbox" name="racer" id="sharik-checkbox">
+                  <span class="start-form__player-name start-form__player-name--racer">Гонщик</span>
+                </label>
+              </li>
+            </ul>
+            <button class="start-form__button-submit" type="submit">
+              <span class="start-form__button-submit-text">Начать игру</span>
+            </button>
+          </form>
+        </div>
+
         <ul class="monopoly__players">
           <!-- Карточка игрока 1 -->
           <li class="monopoly__player player player--barsik">
