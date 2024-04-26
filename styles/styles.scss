@@ -78,12 +78,21 @@ $big-gap: 40px;
 
 // _______________________
 // BEM STYLES
+.monopoly__container {            // самый родительский блок
+  display: flex;
+  gap: $big-gap;
+  justify-content: center;
+  height: 100vh;
+}
+
+
 .monopoly__start-form {           // форма для начала игры
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 
+  width: 400px;
   padding: 20px;
   background-color: #ffffff;
   border-radius: 10px;
@@ -91,14 +100,58 @@ $big-gap: 40px;
 
 .start-form {
   &__title {
-    margin: 0 0 20px;
+    margin: 0 0 30px;
     text-align: center;
   }
 
   &__players {
     display: grid;
-    gap: 10px;
+    gap: 15px;
     margin-bottom: 30px;
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  &__checkbox {
+    -webkit-appearance: none;
+    appearance: none;
+    transition: 0.1s;
+    cursor: pointer;
+
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    &[name="barsik"] {
+      background-image: url("../images/icons/cat-chip.png");
+    }
+    &[name="sharik"] {
+      background-image: url("../images/icons/dog-chip.png");
+    }
+    &[name="dino"] {
+      background-image: url("../images/icons/dino-chip.png");
+    }
+    &[name="racer"] {
+      background-image: url("../images/icons/racer-chip.png");
+    }
+
+    &:hover,
+    &:focus-visible {
+      box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.1);
+      transform: scale(1.1);
+    }
+
+    &:checked {
+      box-shadow: 0 0 10px 5px rgba(189, 177, 16, 0.5);
+      transform: scale(1.05);
+    }
   }
 
   &__button-submit {
@@ -108,14 +161,6 @@ $big-gap: 40px;
   }
 }
 
-
-
-.monopoly__container {            // самый родительский блок
-  display: flex;
-  gap: $big-gap;
-  justify-content: center;
-  height: 100vh;
-}
 
 .monopoly__players {               // список игроков
   flex-shrink: 0;
