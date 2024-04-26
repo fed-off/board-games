@@ -121,7 +121,7 @@ $big-gap: 40px;
     text-align: center;
   }
 
-  &--current {                    // стили для текущего игрока
+  &--current {                    // стили для текущего игрока, который ходит
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
   }
 }
