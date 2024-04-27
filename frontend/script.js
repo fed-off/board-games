@@ -53,3 +53,6 @@ movable.addEventListener('mousedown', (event) => {
   document.addEventListener('mouseup', onMouseUp);
 });
 
+function onClick() {
+  console.log('click:');
+}
