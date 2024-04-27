@@ -1,15 +1,219 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-  <meta charset='utf-8'>
-  <title>Demo</title>
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles/styles.css">
+  <title>Монополия</title>
 </head>
 <body>
-  <h1>Демо одновременного взаимодействия нескольких клиентов!</h1>
-  <div id="movable" style="position: absolute; top: 300px; left: 100px; width: 100px; height: 100px; background-color: red;">
-    Move me!
-  </div>
-  <script src="./script.js"></script>
+  <main>
+    <section class="monopoly">
+      <h1 class="monopoly__title visually-hidden">Монополия</h1>
+      <div class="monopoly__container container">
+
+        <div class="monopoly__form-wrapper overlay">
+          <form class="monopoly__start-form start-form" action="https://echo.htmlacademy.ru/" method="post">
+            <h2 class="start-form__title">Кто будет играть?</h2>
+            <ul class="start-form__players">
+              <li class="start-form__player-selector">
+                <label class="start-form__label">
+                  <input class="start-form__radio" type="radio" name="chip" value="cat">
+                  <span class="start-form__player-name">Барсик</span>
+                </label>
+              </li>
+              <li class="start-form__player-selector">
+                <label class="start-form__label">
+                  <input class="start-form__radio" type="radio" name="chip" value="dog">
+                  <span class="start-form__player-name">Шарик</span>
+                </label>
+              </li>
+              <li class="start-form__player-selector">
+                <label class="start-form__label">
+                  <input class="start-form__radio" type="radio" name="chip" value="dino">
+                  <span class="start-form__player-name">Тиранозавр</span>
+                </label>
+              </li>
+              <li class="start-form__player-selector">
+                <label class="start-form__label">
+                  <input class="start-form__radio" type="radio" name="chip" value="racer">
+                  <span class="start-form__player-name">Гонщик</span>
+                </label>
+              </li>
+            </ul>
+            <button class="start-form__button-submit" type="submit">
+              <span class="start-form__button-submit-text"><b>Подтвердить выбор</b></span>
+            </button>
+            <button class="start-form__start-button" type="button">
+              <span class="start-form__start-button-text"><b>Начать игру</b></span>
+            </button>
+            <p class="start-form__instruction-text">
+              <span>Убедитесь, что <br><strong>все игроки</strong> сделали выбор, затем нажмите кнопку "Начать игру"</span>
+            </p>
+          </form>
+        </div>
+
+        <ul class="monopoly__players">
+          <!-- Карточка игрока 1 -->
+          <li class="monopoly__player player player--cat">
+            <div class="player__info-wrapper">
+              <figure class="player__person-info">
+                <img class="player__avatar" src="../images/icons/cat-chip.png" width="60px" height="60px" alt="Аватар игрока">
+                <figcapture class="player__name">Барсик</figcapture>
+              </figure>
+              <p class="player__money-info">
+                <span class="player__rank">Место: 1</span>
+                <span class="player__balance">Баланс: $ 1500</span>
+                <span class="player__capital">Капитал: $ 0</span>
+              </p>
+            </div>
+            <p class="player__place-info">
+              <span class="player__place">Местоположение: Старт</span>
+            </p>
+          </li>
+
+          <!-- Карточка игрока 2 -->
+          <li class="monopoly__player player player--dog">
+            <div class="player__info-wrapper">
+              <figure class="player__person-info">
+                <img class="player__avatar" src="../images/icons/dog-chip.png" width="60px" height="60px" alt="Аватар игрока">
+                <figcapture class="player__name">Шарик</figcapture>
+              </figure>
+              <p class="player__money-info">
+                <span class="player__rank">Место: 2</span>
+                <span class="player__balance">Баланс: $ 1500</span>
+                <span class="player__capital">Капитал: $ 0</span>
+              </p>
+            </div>
+            <p class="player__place-info">
+              <span class="player__place">Местоположение: Старт</span>
+            </p>
+          </li>
+
+          <!-- Карточка игрока 3 -->
+          <li class="monopoly__player player player--dino">
+            <div class="player__info-wrapper">
+              <figure class="player__person-info">
+                <img class="player__avatar" src="../images/icons/dino-chip.png" width="60px" height="60px" alt="Аватар игрока">
+                <figcapture class="player__name">Тиранозавр</figcapture>
+              </figure>
+              <p class="player__money-info">
+                <span class="player__rank">Место: 3</span>
+                <span class="player__balance">Баланс: $ 1500</span>
+                <span class="player__capital">Капитал: $ 0</span>
+              </p>
+            </div>
+            <p class="player__place-info">
+              <span class="player__place">Местоположение: Старт</span>
+            </p>
+          </li>
+
+          <!-- Карточка игрока 4 -->
+          <li class="monopoly__player player player--racer">
+            <div class="player__info-wrapper">
+              <figure class="player__person-info">
+                <img class="player__avatar" src="../images/icons/racer-chip.png" width="60px" height="60px" alt="Аватар игрока">
+                <figcapture class="player__name">Гонщик</figcapture>
+              </figure>
+              <p class="player__money-info">
+                <span class="player__rank">Место: 4</span>
+                <span class="player__balance">Баланс: $ 1500</span>
+                <span class="player__capital">Капитал: $ 0</span>
+              </p>
+            </div>
+            <p class="player__place-info">
+              <span class="player__place">Местоположение: Старт</span>
+            </p>
+          </li>
+        </ul>
+
+        <!-- Игровое поле -->
+        <div class="monopoly__zone-wrapper">
+          <img class="monopoly__zone-img" src="../images/monopoly-game-zone.png" width="100%" height="100%" alt="Игровое поле">
+        </div>
+
+        <!-- Элементы интерфейса -->
+        <div class="monopoly__interface interface visually-hidden"> <!-- Убрать класс visually-hidden, чтобы вернуть интерфейс -->
+          <ul class="interface__chips">
+            <!-- Фигурка игрока 1 -->
+            <li class="interface__chip">
+              <button class="interface__chip interface__chip--1" type="button">
+                <span class="visually-hidden">фишка</span>
+              </button>
+            </li>
+
+            <!-- Фигурка игрока 2 -->
+            <li class="interface__chip">
+              <button class="interface__chip interface__chip--2" type="button">
+                <span class="visually-hidden">фишка</span>
+              </button>
+            </li>
+
+            <!-- Фигурка игрока 3 -->
+            <li class="interface__chip">
+              <button class="interface__chip interface__chip--3" type="button">
+                <span class="visually-hidden">фишка</span>
+              </button>
+            </li>
+
+            <!-- Фигурка игрока 4 -->
+            <li class="interface__chip">
+              <button class="interface__chip interface__chip--4" type="button">
+                <span class="visually-hidden">фишка</span>
+              </button>
+            </li>
+
+            <!-- Фигурка игрока 5 -->
+            <li class="interface__chip">
+              <button class="interface__chip interface__chip--5" type="button">
+                <span class="visually-hidden">фишка</span>
+              </button>
+            </li>
+
+            <!-- Фигурка игрока 6 -->
+            <li class="interface__chip">
+              <button class="interface__chip interface__chip--6" type="button">
+                <span class="visually-hidden">фишка</span>
+              </button>
+            </li>
+          </ul>
+
+          <!-- Интерфейс броска кубиков -->
+          <div class="interface__dice-box">
+            <p class="interface__dice-result">
+              <span>Результат: </span>
+              <span class="interface__dice-number">0</span>
+            </p>
+            <button class="interface__dice" type="button">
+              <span class="visually-hidden">Бросить кубик</span>
+            </button>
+          </div>
+
+          <!-- Интерфейс отелей -->
+          <div class="interface__hotels-box">
+            <ul class="interface__hotels">
+              <!-- Дешёвый отель -->
+              <li class="interface__hotel-item">
+                <span class="interface__hotel-price visually-hidden">100</span>
+                <button class="interface__hotel interface__hotel--cheap" type="button">
+                  <span class="visually-hidden">Купить дешёвый отель</span>
+                </button>
+              </li>
+
+              <!-- Дорогой отель -->
+              <li class="interface__hotel-item">
+                <span class="interface__hotel-price visually-hidden">400</span>
+                <button class="interface__hotel interface__hotel--expensive" type="button">
+                  <span class="visually-hidden">Купить дорогой отель</span>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>
