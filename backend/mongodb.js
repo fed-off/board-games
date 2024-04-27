@@ -20,4 +20,7 @@ const database = client.db("monopoly");
 
 module.exports = {
   db: database,
+  boards: database.collection("boards"),
+  users: database.collection("users"),
+  players: database.collection("players"),
 }

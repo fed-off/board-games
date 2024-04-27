@@ -84,7 +84,7 @@ https://www.ixbt.com/live/offtopic/obzor-nastolnoy-igry-monopoliya-golosovoe-upr
 - userId - ссылка на user
 - boardId - ссылка на board
 - name
-- chip - фишка
+- chip - фишка: cat, dog, racer, dino
 - balance
 - capital - активы
 - position - позиция на доске
