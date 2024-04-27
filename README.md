@@ -114,7 +114,7 @@ https://www.ixbt.com/live/offtopic/obzor-nastolnoy-igry-monopoliya-golosovoe-upr
 #### Пользователь заходит на сайт.
 Фронт создает подключение с сервером через websocket.
 Сервер создаёт/обновляет запись в Users новую и отправляет в ответ event hello с текущим состоянием игры. Пока что ограничимся, списком players, которые уже находятся на доске, чтобы фронт мог их отобразить. А также chip - выбранная пользователем фигурка, если он уже выбрал фигурку (на случай потери соединения) Пример:
-```json
+```
 {
   event: 'hello',
   data: {
@@ -129,31 +129,25 @@ https://www.ixbt.com/live/offtopic/obzor-nastolnoy-igry-monopoliya-golosovoe-upr
 
 #### Пользователь выбирает за какую фигурку он будет играть
 Пользователь нажимает на свободную карточку и фронт отправляет на сервер event selectChip с именем фигурки. Сервер создаёт запись в Players и отправляет всем игрокам event playerJoined, фронт должен отобразить это поле как занятое. Пример:
-```json
+```
 {
   event: 'selectChip',
   data: {chip: 'car'}
 }
-```
-```json
 {
   event: 'playerJoined',
   data: {
     player: {chip: 'car', balance: 1500, position: 0}
   }
 }
-
+```
 #### Старт игры
 Когда все игроки выбрали фигурки, каждый из них должен нажать на кнопку "начать игру", фронт отправляет на сервер event startGame. Сервер проверяет что все игроки отправили startGame и обновляет статус в Boards и отправляет всем игрокам event gameStarted. Пример:
-```json
+```
 {
   event: 'startGame'
 }
-```
-```json
 {
   event: 'gameStarted',
 }
 ```
-
-
