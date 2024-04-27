@@ -35,16 +35,17 @@ function onConnect(ws) {
   console.log('Client connected from IP', ip);
 
   // Update user
+  const now = new Date();
   mongo.users.updateOne(
     { ip },
     {
       $set: {
         active: true,
-        lastVisit: new Date(),
+        lastVisit: now,
       },
       $setOnInsert: {
         ip: ip,
-        firstVisit: new Date(),
+        firstVisit: now,
       },
     },
     { upsert: true }
@@ -52,10 +53,16 @@ function onConnect(ws) {
 
   // Send hello event with players list
   mongo.players.find().toArray().then(players => {
-    ws.send(JSON.stringify({
-      event: 'hello',
-      data: { players },
-    }));
+    thisPlayer(ws).then(player => {
+      ws.send(JSON.stringify({
+        event: 'hello',
+        data: {
+          chip: player?.chip || null,
+          players
+        },
+      }));
+    });
+
   }).catch(console.error);
 }
 
@@ -115,5 +122,21 @@ eventHandlers.selectChip = function(ws, data) {
         data: { player },
       }));
     }).catch(console.error);
+  }).catch(console.error);
+}
+
+
+/**
+ * Utils
+ **/
+
+function thisUser(ws) {
+  const ip = ws._socket.remoteAddress;
+  return mongo.users.findOne({ ip });
+}
+
+function thisPlayer(ws) {
+  thisUser(ws).then(user => {
+    return mongo.players.findOne({ userId: user._id });
   }).catch(console.error);
 }
