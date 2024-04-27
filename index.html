@@ -18,38 +18,44 @@
             <ul class="start-form__players">
               <li class="start-form__player-selector">
                 <label class="start-form__label">
-                  <input class="start-form__checkbox" type="checkbox" name="barsik" id="barsik-checkbox" checked>
+                  <input class="start-form__radio" type="radio" name="chip" value="cat">
                   <span class="start-form__player-name">Барсик</span>
                 </label>
               </li>
               <li class="start-form__player-selector">
                 <label class="start-form__label">
-                  <input class="start-form__checkbox" type="checkbox" name="sharik" id="sharik-checkbox" checked>
+                  <input class="start-form__radio" type="radio" name="chip" value="dog">
                   <span class="start-form__player-name">Шарик</span>
                 </label>
               </li>
               <li class="start-form__player-selector">
                 <label class="start-form__label">
-                  <input class="start-form__checkbox" type="checkbox" name="dino" id="sharik-checkbox">
+                  <input class="start-form__radio" type="radio" name="chip" value="dino">
                   <span class="start-form__player-name">Тиранозавр</span>
                 </label>
               </li>
               <li class="start-form__player-selector">
                 <label class="start-form__label">
-                  <input class="start-form__checkbox" type="checkbox" name="racer" id="sharik-checkbox">
+                  <input class="start-form__radio" type="radio" name="chip" value="racer">
                   <span class="start-form__player-name">Гонщик</span>
                 </label>
               </li>
             </ul>
             <button class="start-form__button-submit" type="submit">
-              <span class="start-form__button-submit-text">Начать игру</span>
+              <span class="start-form__button-submit-text"><b>Подтвердить выбор</b></span>
             </button>
+            <button class="start-form__start-button" type="button">
+              <span class="start-form__start-button-text"><b>Начать игру</b></span>
+            </button>
+            <p class="start-form__instruction-text">
+              <span>Убедитесь, что <br><strong>все игроки</strong> сделали выбор, затем нажмите кнопку "Начать игру"</span>
+            </p>
           </form>
         </div>
 
         <ul class="monopoly__players">
           <!-- Карточка игрока 1 -->
-          <li class="monopoly__player player player--barsik">
+          <li class="monopoly__player player player--cat">
             <div class="player__info-wrapper">
               <figure class="player__person-info">
                 <img class="player__avatar" src="images/icons/cat-chip.png" width="60px" height="60px" alt="Аватар игрока">
@@ -67,7 +73,7 @@
           </li>
 
           <!-- Карточка игрока 2 -->
-          <li class="monopoly__player player player--sharik">
+          <li class="monopoly__player player player--dog">
             <div class="player__info-wrapper">
               <figure class="player__person-info">
                 <img class="player__avatar" src="images/icons/dog-chip.png" width="60px" height="60px" alt="Аватар игрока">
@@ -102,6 +108,7 @@
             </p>
           </li>
 
+          <!-- Карточка игрока 4 -->
           <li class="monopoly__player player player--racer">
             <div class="player__info-wrapper">
               <figure class="player__person-info">
