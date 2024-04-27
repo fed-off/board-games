@@ -15,7 +15,10 @@ while true; do
     echo "Changes found. Deploying the changes..."
     git clean -df || { echo "Failed to clean the repository"; exit 1; }
     git pull || { echo "Failed to pull from remote repository"; exit 1; }
+    # Frontend
+    (cd frontend && npm install && npm run build) || { echo "Failed to build frontend"; exit 1; }
     sudo systemctl restart nginx || { echo "Failed to restart nginx"; exit 1; }
+    # Backend
     (cd backend && npm install) || { echo "Failed to install npm packages"; exit 1; }
     sudo systemctl restart ws-server || { echo "Failed to restart ws-server"; exit 1; }
     sudo systemctl restart deploy || { echo "Failed to restart ws-server"; exit 1; }
