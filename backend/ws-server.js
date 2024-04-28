@@ -136,7 +136,7 @@ function thisUser(ws) {
 }
 
 function thisPlayer(ws) {
-  thisUser(ws).then(user => {
+  return thisUser(ws).then(user => {
     return mongo.players.findOne({ userId: user._id });
   }).catch(console.error);
 }
