@@ -22,14 +22,6 @@ wss.on('connection', function(ws) {
 });
 
 
-function sendToAll(message) {
-  wss.clients.forEach(function each(client) {
-    if (client.readyState === ws.WebSocket.OPEN) {
-      client.send(message);
-    }
-  });
-};
-
 function onConnect(ws) {
   const ip = ws._socket.remoteAddress;
   console.log('Client connected from IP', ip);
@@ -114,6 +106,7 @@ eventHandlers.selectChip = function(ws, data) {
       chip: data.chip,
       balance: DEFAULT_BALANCE,
       position: 0,
+      ready: false,
     };
     mongo.players.insertOne(player).then(_ => {
       // Send playerJoined event to all clients
@@ -126,9 +119,39 @@ eventHandlers.selectChip = function(ws, data) {
 }
 
 
+eventHandlers.startGame = function(ws, data) {
+  console.log('startGame:', data);
+  // Set ready flag for the player
+  thisPlayer(ws).then(player => {
+    return mongo.players.updateOne(
+      { _id: player._id },
+      { $set: { ready: true } }
+    )
+  // Check if all players are ready
+  }).then(_ => {
+    return mongo.players.find({ ready: false }).toArray();
+  // Start the game
+  }).then(players => {
+    if (players.length === 0) {
+      sendToAll(JSON.stringify({
+        event: 'gameStarted',
+        data: {}
+      }));
+    }
+  }).catch(console.error);
+}
+
 /**
  * Utils
  **/
+
+function sendToAll(message) {
+  wss.clients.forEach(function each(client) {
+    if (client.readyState === ws.WebSocket.OPEN) {
+      client.send(message);
+    }
+  });
+}
 
 function thisUser(ws) {
   const ip = ws._socket.remoteAddress;

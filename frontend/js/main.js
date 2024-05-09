@@ -25,10 +25,15 @@ ws.addEventListener('message', function(event) {
 
 
 const eventHandlers = {};
-eventHandlers.hello = function(message) {
-  console.log('Hello:', message);
+
+eventHandlers.hello = function(data) {
+  console.log('Hello:', data);
 }
 
-eventHandlers.playerJoined = function(message) {
-  console.log('playerJoined:', message);
+eventHandlers.playerJoined = function(data) {
+  console.log('playerJoined:', data);
+}
+
+eventHandlers.gameStarted = function(data) {
+  console.log('gameStarted: ', data);
 }

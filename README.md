@@ -88,6 +88,7 @@ https://www.ixbt.com/live/offtopic/obzor-nastolnoy-igry-monopoliya-golosovoe-upr
 - balance
 - capital - активы
 - position - позиция на доске
+- ready - готов ли к началу игры
 
 *Cells* - клетки игрового поля
 - boardId - ссылка на board
@@ -145,10 +146,12 @@ https://www.ixbt.com/live/offtopic/obzor-nastolnoy-igry-monopoliya-golosovoe-upr
 Когда все игроки выбрали фигурки, каждый из них должен нажать на кнопку "начать игру", фронт отправляет на сервер event startGame. Сервер проверяет что все игроки отправили startGame и обновляет статус в Boards и отправляет всем игрокам event gameStarted. Пример:
 ```
 {
-  event: 'startGame'
+  event: 'startGame',
+  data: {}
 }
 {
   event: 'gameStarted',
+  data: {}
 }
 ```
 
