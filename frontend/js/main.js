@@ -56,3 +56,11 @@ startForm.addEventListener('submit', function(event) {
     },
   }));
 });
+
+// startGame
+startForm.querySelector('button.start-form__start-button').addEventListener('click', function(event) {
+  ws.send(JSON.stringify({
+    event: 'startGame',
+    data: {},
+  }));
+});
