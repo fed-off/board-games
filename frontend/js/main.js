@@ -37,3 +37,22 @@ eventHandlers.playerJoined = function(data) {
 eventHandlers.gameStarted = function(data) {
   console.log('gameStarted: ', data);
 }
+
+
+// selectChip
+const startForm = document.querySelector('form.monopoly__start-form');
+startForm.addEventListener('submit', function(event) {
+  event.preventDefault();
+  const selectedInput = startForm.querySelector('input[name="chip"]:checked');
+  const selectedChip = selectedInput?.value;
+  console.log('Selected chip:', selectedChip);
+  if (!selectedChip) {
+    return;
+  }
+  ws.send(JSON.stringify({
+    event: 'selectChip',
+    data: {
+      chip: selectedChip,
+    },
+  }));
+});
