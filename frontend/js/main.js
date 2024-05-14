@@ -1,5 +1,33 @@
 const startForm = document.querySelector('form.monopoly__start-form');
 
+// == State ==
+let myChip = null;
+function setMyChip(chip) {
+  if (chip === myChip) return;
+  myChip = chip;
+  startForm.querySelector(`input[value="${chip}"]`).checked = true;
+  startForm.querySelectorAll('input[type="radio"]').forEach(input => input.disabled = true);
+  startForm.querySelector('button.start-form__button-submit').disabled = true;
+  startForm.querySelector('button.start-form__start-button').disabled = false;
+}
+
+let players = [];
+function setPlayers(newPlayers) {
+  if (newPlayers.length === players.length) return;
+  players = newPlayers;
+  startForm.querySelectorAll('input[type="radio"]').forEach(input => {
+    input.classList.remove('start-form__radio--occupied');
+    input.disabled = false;
+  });
+  players.forEach(player => {
+    const chipInput = startForm.querySelector(`input[value="${player.chip}"]`);
+    chipInput.classList.add('start-form__radio--occupied');
+    chipInput.disabled = true;
+  });
+}
+
+
+// == WebSocket ==
 const ws = new WebSocket(`ws://${window.location.hostname}:3001`);
 // Replace for development to connect to the remote server
 // const ws = new WebSocket(`ws://3.125.34.21:3001`);
@@ -18,7 +46,6 @@ ws.addEventListener('error', function(event) {
 
 ws.addEventListener('message', function(event) {
   const message = JSON.parse(event.data);
-  console.log('Message from server:', message);
   // Call function based on the event name if it exists
   if (typeof eventHandlers[message.event] === 'function') {
     eventHandlers[message.event](message.data);
@@ -28,27 +55,22 @@ ws.addEventListener('message', function(event) {
 });
 
 
+// == Event Handlers ==
 const eventHandlers = {};
 
 eventHandlers.hello = function(data) {
-  console.log('Hello:', data);
+  console.log('hello:', data);
+  setPlayers(data.players);
   if (data.chip) {
-    const ourChipInput = startForm.querySelector(`input[value="${data.chip}"]`);
-    ourChipInput.checked = true;
-    startForm.querySelectorAll('input[type="radio"]').forEach(input => {
-      console.log('input:', input);
-      input.disabled = true;
-    });
+    setMyChip(data.chip);
   }
-  data.players.filter(player => player.chip !== data.chip).forEach(player => {
-    const chipInput = startForm.querySelector(`input[value="${player.chip}"]`);
-    chipInput.classList.add('start-form__radio--occupied');
-    chipInput.disabled = true;
-  });
 }
 
 eventHandlers.playerJoined = function(data) {
   console.log('playerJoined:', data);
+  if (data.player.chip !== myChip) {
+    setPlayers([...players, data.player]);
+  }
 }
 
 eventHandlers.gameStarted = function(data) {
@@ -56,6 +78,7 @@ eventHandlers.gameStarted = function(data) {
 }
 
 
+// == Form ==
 // selectChip
 startForm.addEventListener('submit', function(event) {
   event.preventDefault();
@@ -65,6 +88,7 @@ startForm.addEventListener('submit', function(event) {
   if (!selectedChip) {
     return;
   }
+  setMyChip(selectedChip);
   ws.send(JSON.stringify({
     event: 'selectChip',
     data: {
@@ -75,6 +99,7 @@ startForm.addEventListener('submit', function(event) {
 
 // startGame
 startForm.querySelector('button.start-form__start-button').addEventListener('click', function(event) {
+  startForm.querySelector('button.start-form__start-button').disabled = true;
   ws.send(JSON.stringify({
     event: 'startGame',
     data: {},
