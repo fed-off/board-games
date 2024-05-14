@@ -1,4 +1,8 @@
+const startForm = document.querySelector('form.monopoly__start-form');
+
 const ws = new WebSocket(`ws://${window.location.hostname}:3001`);
+// Replace for development to connect to the remote server
+// const ws = new WebSocket(`ws://3.125.34.21:3001`);
 
 ws.addEventListener('open', function(event) {
   console.log('WebSocket connected');
@@ -28,6 +32,19 @@ const eventHandlers = {};
 
 eventHandlers.hello = function(data) {
   console.log('Hello:', data);
+  if (data.chip) {
+    const ourChipInput = startForm.querySelector(`input[value="${data.chip}"]`);
+    ourChipInput.checked = true;
+    startForm.querySelectorAll('input[type="radio"]').forEach(input => {
+      console.log('input:', input);
+      input.disabled = true;
+    });
+  }
+  data.players.filter(player => player.chip !== data.chip).forEach(player => {
+    const chipInput = startForm.querySelector(`input[value="${player.chip}"]`);
+    chipInput.classList.add('start-form__radio--occupied');
+    chipInput.disabled = true;
+  });
 }
 
 eventHandlers.playerJoined = function(data) {
@@ -40,7 +57,6 @@ eventHandlers.gameStarted = function(data) {
 
 
 // selectChip
-const startForm = document.querySelector('form.monopoly__start-form');
 startForm.addEventListener('submit', function(event) {
   event.preventDefault();
   const selectedInput = startForm.querySelector('input[name="chip"]:checked');
