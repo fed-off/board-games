@@ -12,47 +12,6 @@
       <h1 class="monopoly__title visually-hidden">Монополия</h1>
       <div class="monopoly__container container">
 
-        <div class="monopoly__form-wrapper overlay">
-          <form class="monopoly__start-form start-form" action="https://echo.htmlacademy.ru/" method="post">
-            <h2 class="start-form__title">Кто будет играть?</h2>
-            <ul class="start-form__players">
-              <li class="start-form__player-selector">
-                <label class="start-form__label">
-                  <input class="start-form__radio" type="radio" name="chip" value="cat">
-                  <span class="start-form__player-name">Барсик</span>
-                </label>
-              </li>
-              <li class="start-form__player-selector">
-                <label class="start-form__label">
-                  <input class="start-form__radio" type="radio" name="chip" value="dog">
-                  <span class="start-form__player-name">Шарик</span>
-                </label>
-              </li>
-              <li class="start-form__player-selector">
-                <label class="start-form__label">
-                  <input class="start-form__radio" type="radio" name="chip" value="dino">
-                  <span class="start-form__player-name">Тиранозавр</span>
-                </label>
-              </li>
-              <li class="start-form__player-selector">
-                <label class="start-form__label">
-                  <input class="start-form__radio" type="radio" name="chip" value="racer">
-                  <span class="start-form__player-name">Гонщик</span>
-                </label>
-              </li>
-            </ul>
-            <button class="start-form__button-submit" type="submit">
-              <span class="start-form__button-submit-text"><b>Подтвердить выбор</b></span>
-            </button>
-            <button class="start-form__start-button" type="button" disabled>
-              <span class="start-form__start-button-text"><b>Начать игру</b></span>
-            </button>
-            <p class="start-form__instruction-text">
-              <span>Убедитесь, что <br><strong>все игроки</strong> сделали выбор, затем нажмите кнопку "Начать игру"</span>
-            </p>
-          </form>
-        </div>
-
         <ul class="monopoly__players">
           <!-- Карточка игрока 1 -->
           <li class="monopoly__player player player--cat">
@@ -130,6 +89,63 @@
         <!-- Игровое поле -->
         <div class="monopoly__zone-wrapper">
           <img class="monopoly__zone-img" src="./images/monopoly-game-zone.png" width="100%" height="100%" alt="Игровое поле">
+
+          <!-- Поля игрового поля -->
+          <div class="monopoly__table table">
+            <!-- ВЕРХНЯЯ СТРОКА -->
+            <div class="table__row table__row--top">
+              <div class="table__column table__column--left"></div>
+              <div class="table__column table__column--2"></div>
+              <div class="table__column table__column--3"></div>
+              <div class="table__column table__column--4"></div>
+              <div class="table__column table__column--5"></div>
+              <div class="table__column table__column--6"></div>
+              <div class="table__column table__column--7"></div>
+              <div class="table__column table__column--8"></div>
+              <div class="table__column table__column--right"></div>
+            </div>
+
+            <!-- СРЕДНЯЯ СТРОКА -->
+            <div class="table__row table__row--middle">
+              <!-- Левая колонка -->
+              <div class="table__column table__column--left">
+                <div class="table__column table__column--row-1"></div>
+                <div class="table__column table__column--row-2"></div>
+                <div class="table__column table__column--row-3"></div>
+                <div class="table__column table__column--row-4"></div>
+                <div class="table__column table__column--row-5"></div>
+                <div class="table__column table__column--row-6"></div>
+                <div class="table__column table__column--row-7"></div>
+              </div>
+
+              <!-- ИНТЕРФЕЙС ВНУТРИ -->
+              <div class="table__column table__column--middle"></div>
+
+              <!-- Правая колонка -->
+              <div class="table__column table__column--right">
+                <div class="table__column table__column--row-1"></div>
+                <div class="table__column table__column--row-2"></div>
+                <div class="table__column table__column--row-3"></div>
+                <div class="table__column table__column--row-4"></div>
+                <div class="table__column table__column--row-5"></div>
+                <div class="table__column table__column--row-6"></div>
+                <div class="table__column table__column--row-7"></div>
+              </div>
+            </div>
+
+            <!-- НИЖНЯЯ СТРОКА -->
+            <div class="table__row table__row--bottom">
+              <div class="table__column table__column--left"></div>
+              <div class="table__column table__column--2"></div>
+              <div class="table__column table__column--3"></div>
+              <div class="table__column table__column--4"></div>
+              <div class="table__column table__column--5"></div>
+              <div class="table__column table__column--6"></div>
+              <div class="table__column table__column--7"></div>
+              <div class="table__column table__column--8"></div>
+              <div class="table__column table__column--right"></div>
+            </div>
+          </div>
         </div>
 
         <!-- Элементы интерфейса -->

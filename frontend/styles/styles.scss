@@ -85,156 +85,6 @@ $big-gap: 40px;
   height: 100vh;
 }
 
-
-.monopoly__start-form {           // форма для начала игры
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  width: 400px;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 10px;
-}
-
-.start-form {
-  &__title {
-    margin: 0 0 30px;
-    text-align: center;
-  }
-
-  &__players {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin-bottom: 30px;
-  }
-
-  &__label {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    cursor: pointer;
-
-    &:has(:disabled) {
-      cursor: not-allowed;
-    }
-  }
-
-  &__radio {
-    -webkit-appearance: none;
-    appearance: none;
-    transition: 0.1s;
-    cursor: pointer;
-
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-
-    &[value="cat"] {
-      background-image: url("../images/icons/cat-chip.png");
-    }
-    &[value="dog"] {
-      background-image: url("../images/icons/dog-chip.png");
-    }
-    &[value="dino"] {
-      background-image: url("../images/icons/dino-chip.png");
-    }
-    &[value="racer"] {
-      background-image: url("../images/icons/racer-chip.png");
-    }
-
-    &:hover:not(:disabled):not(:checked),
-    &:focus-visible {
-      box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.1);
-      transform: scale(1.1);
-    }
-
-    &:checked {
-      box-shadow: 0 0 10px 5px rgba(189, 177, 16, 0.5);
-      transform: scale(1.05);
-    }
-
-    &--occupied {
-      box-shadow: 0 0 10px 5px rgba(165, 25, 25, 0.5);
-    }
-
-    &:disabled {
-      cursor: not-allowed;
-      opacity: 0.7;
-    }
-  }
-
-  & button {
-    display: block;
-    width: 100%;
-    padding: 5px;
-    transition: 0.1s;
-    border: 0;
-  }
-
-  &__button-submit {
-    margin-bottom: 20px;
-
-    color: white;
-    background-color: rgb(55, 214, 50);
-
-    &:hover,
-    &:focus-visible {
-      background-color: rgb(80, 196, 50);
-    }
-
-    &:active {
-      background-color: rgb(45, 170, 50);
-    }
-  }
-
-  &__instruction-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    width: 230px;
-    margin: 0 auto 20px;
-    padding: 20px;
-
-    color: white;
-    background-color: rgba(0, 0, 0, 0.85);
-    border-radius: 10px;
-    text-align: center;
-
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s, visibility 0.2s;
-  }
-
-  &__start-button {
-    color: white;
-    background-color: rgb(255, 77, 50);
-
-    &:hover,
-    &:focus-visible {
-      background-color: rgb(235, 77, 50);
-    }
-
-    &:active {
-      background-color: rgb(211, 77, 50);
-    }
-
-    &:hover ~ .start-form__instruction-text,
-    &:focus-visible ~ .start-form__instruction-text {
-      opacity: 1;
-      visibility: visible;
-    }
-  }
-}
-
-
 .monopoly__players {               // список игроков
   flex-shrink: 0;
 
@@ -293,6 +143,7 @@ $big-gap: 40px;
 
 
 .monopoly__zone-wrapper {            // обертка для зоны
+  position: relative;
   flex-shrink: 0;
 }
 
@@ -303,5 +154,33 @@ $big-gap: 40px;
   border-radius: 10px;
 }
 
+.table {
+  z-index: 2;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  grid-template-rows: 179fr 837fr 186fr;
+
+  &__row--top {
+    background-color: white;
+    opacity: 0.5;
+  }
+
+  &__row--middle {
+    background-color: blue;
+    opacity: 0.5;
+  }
+
+  &__row--bottom {
+    background-color: red;
+    opacity: 0.5;
+  }
+}
+
 // _______________________
-// ' sass --watch ./styles/styles.scss:./styles/styles.css ' - команда для автоматической компиляции
+// ' sass --watch ./frontend/styles/styles.scss:./frontend/styles/styles.css ' - команда для автоматической компиляции
