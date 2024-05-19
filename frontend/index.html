@@ -44,6 +44,8 @@
                 <div class="table__column table__column--row-7"></div>
               </div>
 
+
+              <!-- TODO: пофиксить нахрен бэм -->
               <!-- ИНТЕРФЕЙС ВНУТРИ -->
               <div class="table__column table__column--middle table__zone-interface zone-interface">
                 <ul class="monopoly__players">
@@ -95,6 +97,87 @@
                     </label>
                   </li>
                 </ul>
+
+
+
+                <!-- Элементы интерфейса -->
+                <div class="monopoly__interface interface visually-hidden"> <!-- Убрать класс visually-hidden, чтобы вернуть интерфейс -->
+                  <ul class="interface__chips">
+                    <!-- Фигурка игрока 1 -->
+                    <li class="interface__chip">
+                      <button class="interface__chip interface__chip--1" type="button">
+                        <span class="visually-hidden">фишка</span>
+                      </button>
+                    </li>
+
+                    <!-- Фигурка игрока 2 -->
+                    <li class="interface__chip">
+                      <button class="interface__chip interface__chip--2" type="button">
+                        <span class="visually-hidden">фишка</span>
+                      </button>
+                    </li>
+
+                    <!-- Фигурка игрока 3 -->
+                    <li class="interface__chip">
+                      <button class="interface__chip interface__chip--3" type="button">
+                        <span class="visually-hidden">фишка</span>
+                      </button>
+                    </li>
+
+                    <!-- Фигурка игрока 4 -->
+                    <li class="interface__chip">
+                      <button class="interface__chip interface__chip--4" type="button">
+                        <span class="visually-hidden">фишка</span>
+                      </button>
+                    </li>
+
+                    <!-- Фигурка игрока 5 -->
+                    <li class="interface__chip">
+                      <button class="interface__chip interface__chip--5" type="button">
+                        <span class="visually-hidden">фишка</span>
+                      </button>
+                    </li>
+
+                    <!-- Фигурка игрока 6 -->
+                    <li class="interface__chip">
+                      <button class="interface__chip interface__chip--6" type="button">
+                        <span class="visually-hidden">фишка</span>
+                      </button>
+                    </li>
+                  </ul>
+
+                  <!-- Интерфейс броска кубиков -->
+                  <div class="interface__dice-box">
+                    <p class="interface__dice-result">
+                      <span>Результат: </span>
+                      <span class="interface__dice-number">0</span>
+                    </p>
+                    <button class="interface__dice" type="button">
+                      <span class="visually-hidden">Бросить кубик</span>
+                    </button>
+                  </div>
+
+                  <!-- Интерфейс отелей -->
+                  <div class="interface__hotels-box">
+                    <ul class="interface__hotels">
+                      <!-- Дешёвый отель -->
+                      <li class="interface__hotel-item">
+                        <span class="interface__hotel-price visually-hidden">100</span>
+                        <button class="interface__hotel interface__hotel--cheap" type="button">
+                          <span class="visually-hidden">Купить дешёвый отель</span>
+                        </button>
+                      </li>
+
+                      <!-- Дорогой отель -->
+                      <li class="interface__hotel-item">
+                        <span class="interface__hotel-price visually-hidden">400</span>
+                        <button class="interface__hotel interface__hotel--expensive" type="button">
+                          <span class="visually-hidden">Купить дорогой отель</span>
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
 
               <!-- Правая колонка -->
@@ -121,85 +204,6 @@
               <div class="table__column table__column--8"></div>
               <div class="table__column table__column--right"></div>
             </div>
-          </div>
-        </div>
-
-        <!-- Элементы интерфейса -->
-        <div class="monopoly__interface interface visually-hidden"> <!-- Убрать класс visually-hidden, чтобы вернуть интерфейс -->
-          <ul class="interface__chips">
-            <!-- Фигурка игрока 1 -->
-            <li class="interface__chip">
-              <button class="interface__chip interface__chip--1" type="button">
-                <span class="visually-hidden">фишка</span>
-              </button>
-            </li>
-
-            <!-- Фигурка игрока 2 -->
-            <li class="interface__chip">
-              <button class="interface__chip interface__chip--2" type="button">
-                <span class="visually-hidden">фишка</span>
-              </button>
-            </li>
-
-            <!-- Фигурка игрока 3 -->
-            <li class="interface__chip">
-              <button class="interface__chip interface__chip--3" type="button">
-                <span class="visually-hidden">фишка</span>
-              </button>
-            </li>
-
-            <!-- Фигурка игрока 4 -->
-            <li class="interface__chip">
-              <button class="interface__chip interface__chip--4" type="button">
-                <span class="visually-hidden">фишка</span>
-              </button>
-            </li>
-
-            <!-- Фигурка игрока 5 -->
-            <li class="interface__chip">
-              <button class="interface__chip interface__chip--5" type="button">
-                <span class="visually-hidden">фишка</span>
-              </button>
-            </li>
-
-            <!-- Фигурка игрока 6 -->
-            <li class="interface__chip">
-              <button class="interface__chip interface__chip--6" type="button">
-                <span class="visually-hidden">фишка</span>
-              </button>
-            </li>
-          </ul>
-
-          <!-- Интерфейс броска кубиков -->
-          <div class="interface__dice-box">
-            <p class="interface__dice-result">
-              <span>Результат: </span>
-              <span class="interface__dice-number">0</span>
-            </p>
-            <button class="interface__dice" type="button">
-              <span class="visually-hidden">Бросить кубик</span>
-            </button>
-          </div>
-
-          <!-- Интерфейс отелей -->
-          <div class="interface__hotels-box">
-            <ul class="interface__hotels">
-              <!-- Дешёвый отель -->
-              <li class="interface__hotel-item">
-                <span class="interface__hotel-price visually-hidden">100</span>
-                <button class="interface__hotel interface__hotel--cheap" type="button">
-                  <span class="visually-hidden">Купить дешёвый отель</span>
-                </button>
-              </li>
-
-              <!-- Дорогой отель -->
-              <li class="interface__hotel-item">
-                <span class="interface__hotel-price visually-hidden">400</span>
-                <button class="interface__hotel interface__hotel--expensive" type="button">
-                  <span class="visually-hidden">Купить дорогой отель</span>
-                </button>
-              </li>
-            </ul>
           </div>
         </div>
       </div>
