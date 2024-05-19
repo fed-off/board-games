@@ -180,6 +180,11 @@ $big-gap: 40px;
     background-color: red;
     opacity: 0.5;
   }
+
+  &__row--outside {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  }
 }
 
 // _______________________
