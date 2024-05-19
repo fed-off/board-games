@@ -96,50 +96,26 @@ $big-gap: 40px;
 }
 
 .player {                          // игрок (карточка)
-  display: grid;
-  align-items: center;
-  gap: 10px;
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.1);
 
-  &__info-wrapper {               // обертка для информации об игроке
-    display: flex;
-    justify-content: space-around;
-    gap: $little-gap;
-  }
 
   &__person-info {                // информация об игроке
-    display: grid;
+    display: flex;
     justify-items: center;
-    justify-content: center;
-    gap: calc($little-gap / 2);
+    justify-content: space-around;
 
-    width: 120px;
     margin: 0;
+    // margin-bottom: 30%;
+    padding: 40px;
   }
 
-  &__avatar {                     // аватар игрока
-    border-radius: 50%;
-  }
+  &__name {                      // имя игрока
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  &__name {                       // имя игрока
-    text-align: center;
-  }
-
-  &__money-info {                 // информация о деньгах
-    display: grid;
-    align-content: space-between;
-
-    width: 160px;
-  }
-
-  &__place-info {                    // информация о месте
-    min-width: 320px;
-    text-align: center;
-  }
-
-  &--current {                    // стили для текущего игрока, который ходит
-    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
+    font-size: 32px;
   }
 }
 
