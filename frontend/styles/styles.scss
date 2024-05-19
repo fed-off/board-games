@@ -89,7 +89,10 @@ $big-gap: 40px;
   flex-shrink: 0;
 
   display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: $little-gap;
+
+  height: 100%;
 }
 
 .player {                          // игрок (карточка)
@@ -97,7 +100,6 @@ $big-gap: 40px;
   align-items: center;
   gap: 10px;
   padding: 10px;
-  border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.1);
 
   &__info-wrapper {               // обертка для информации об игроке
@@ -166,22 +168,9 @@ $big-gap: 40px;
   display: grid;
   grid-template-rows: 179fr 837fr 186fr;
 
-  &__row--top {
-    background-color: white;
-    opacity: 0.5;
-  }
-
   &__row--middle {
-    background-color: blue;
-    opacity: 0.5;
-
     display: grid;
     grid-template-columns: 1fr 7fr 1fr;
-  }
-
-  &__row--bottom {
-    background-color: red;
-    opacity: 0.5;
   }
 
   &__row--outside {
