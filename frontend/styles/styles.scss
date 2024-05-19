@@ -188,6 +188,11 @@ $big-gap: 40px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   }
+
+  &__column--outside {
+    display: grid;
+    grid-template-rows: repeat(auto-fit, minmax(0, 1fr));
+  }
 }
 
 // _______________________
