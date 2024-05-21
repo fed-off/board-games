@@ -133,6 +133,16 @@ $big-gap: 40px;
     font-size: 28px;
   }
 
+  &__money-icon {
+    display: block;
+    width: 50px;
+    height: 50px;
+    background-image: url("../images/icons/money.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
   &__balance-value {
     width: 150px;
     height: 50px;
@@ -166,7 +176,7 @@ $big-gap: 40px;
   border-radius: 10px;
 }
 
-.table {
+.table {                            // внутренняя сетка поля
   z-index: 2;
 
   position: absolute;
@@ -191,6 +201,63 @@ $big-gap: 40px;
   &__column--outside {
     display: grid;
     grid-template-rows: repeat(auto-fit, minmax(0, 1fr));
+  }
+}
+
+
+.zone-interface {
+  position: relative;
+
+  &__dice-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    padding: 2%;
+
+    border-radius: 15px;
+    background-color: #9c7b55;
+    box-shadow: 5px 5px 11px black;
+  }
+
+  &__dice-result {
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 25px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  &__dice {
+    width: 150px;
+    height: 120px;
+    padding: 0;
+
+    appearance: none;
+    border: 0;
+
+    background-image: url("../images/icons/dice.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    transition: 0.08s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &:active {
+      transform: scale(1.05);
+    }
+
   }
 }
 
