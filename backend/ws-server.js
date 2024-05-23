@@ -1,6 +1,6 @@
 const ws = require('ws');
 const mongo = require('./mongodb.js');
-const { DEFAULT_BALANCE } = require('./constants.js');
+// const { DEFAULT_BALANCE } = require('./constants.js');
 
 
 const PORT = process.env.WSPORT || 3001;
@@ -26,35 +26,22 @@ function onConnect(ws) {
   const ip = ws._socket.remoteAddress;
   console.log('Client connected from IP', ip);
 
-  // Update user
-  const now = new Date();
-  mongo.users.updateOne(
-    { ip },
-    {
-      $set: {
-        active: true,
-        lastVisit: now,
-      },
-      $setOnInsert: {
-        ip: ip,
-        firstVisit: now,
-      },
-    },
-    { upsert: true }
-  ).then(console.debug).catch(console.error);
-
-  // Send hello event with players list
-  mongo.players.find().toArray().then(players => {
-    thisPlayer(ws).then(player => {
+  mongo.state.findOne().then(doc => {
+    if (doc) {
       ws.send(JSON.stringify({
-        event: 'hello',
-        data: {
-          chip: player?.chip || null,
-          players
-        },
+        event: 'state',
+        data: doc,
       }));
-    });
-
+    } else {
+      const defaultState = { dice: [0, 0] };
+      mongo.state.insertOne(defaultState)
+        .then(_ => {
+          ws.send(JSON.stringify({
+            event: 'state',
+            data: defaultState,
+          }));
+        }).catch(console.error);
+    }
   }).catch(console.error);
 }
 
@@ -62,16 +49,6 @@ function onConnect(ws) {
 function onDisconnect(ws) {
   const ip = ws._socket.remoteAddress;
   console.log('Client disconnected from IP', ip);
-
-  // Update user
-  mongo.users.updateOne(
-    { ip },
-    {
-      $set: {
-        active: false,
-      },
-    }
-  ).then(console.debug).catch(console.error);
 }
 
 
@@ -94,56 +71,31 @@ function onMessage(ws, data) {
  **/
 const eventHandlers = {};
 
-eventHandlers.selectChip = function(ws, data) {
-  console.log('selectChip:', data);
-  const ip = ws._socket.remoteAddress;
+eventHandlers.rollDice = function(ws, data) {
+  console.log('rollDice:', data);
+  const result = [randomInt(1, 6), randomInt(1, 6)];
 
-  // Find user
-  mongo.users.findOne({ ip }).then(user => {
-    // Create new player
-    const player = {
-      userId: user._id,
-      chip: data.chip,
-      balance: DEFAULT_BALANCE,
-      position: 0,
-      ready: false,
-    };
-    mongo.players.insertOne(player).then(_ => {
-      // Send playerJoined event to all clients
-      sendToAll(JSON.stringify({
-        event: 'playerJoined',
-        data: { player },
-      }));
-    }).catch(console.error);
+  mongo.state.findOneAndUpdate(
+    {},
+    {
+      $set: {
+        dice: result,
+      },
+    },
+    { returnDocument: 'after' }
+  ).then(doc => {
+    sendToAll(JSON.stringify({
+      event: 'state',
+      data: doc,
+    }));
   }).catch(console.error);
 }
 
 
-eventHandlers.startGame = function(ws, data) {
-  console.log('startGame:', data);
-  // Set ready flag for the player
-  thisPlayer(ws).then(player => {
-    return mongo.players.updateOne(
-      { _id: player._id },
-      { $set: { ready: true } }
-    )
-  // Check if all players are ready
-  }).then(_ => {
-    return mongo.players.find({ ready: false }).toArray();
-  // Start the game
-  }).then(players => {
-    if (players.length === 0) {
-      sendToAll(JSON.stringify({
-        event: 'gameStarted',
-        data: {}
-      }));
-    }
-  }).catch(console.error);
-}
 
-/**
- * Utils
- **/
+// /**
+//  * Utils
+//  **/
 
 function sendToAll(message) {
   wss.clients.forEach(function each(client) {
@@ -153,13 +105,11 @@ function sendToAll(message) {
   });
 }
 
-function thisUser(ws) {
-  const ip = ws._socket.remoteAddress;
-  return mongo.users.findOne({ ip });
-}
+// function thisUser(ws) {
+//   const ip = ws._socket.remoteAddress;
+//   return mongo.users.findOne({ ip });
+// }
 
-function thisPlayer(ws) {
-  return thisUser(ws).then(user => {
-    return mongo.players.findOne({ userId: user._id });
-  }).catch(console.error);
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
