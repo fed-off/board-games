@@ -18,8 +18,16 @@ client.connect().then(() => {
 
 const database = client.db("monopoly");
 
+async function updateState(query) {
+  const filter = {};
+  const update = { $set: query };
+  const options = { returnDocument: 'after', upsert: true };
+  return database.collection("state").findOneAndUpdate(filter, update, options);
+}
+
 module.exports = {
   db: database,
   users: database.collection("users"),
   state: database.collection("state"),
+  updateState,
 }

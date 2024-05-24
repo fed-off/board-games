@@ -72,23 +72,15 @@ function onMessage(ws, data) {
 const eventHandlers = {};
 
 eventHandlers.rollDice = function(ws, data) {
-  console.log('rollDice:', data);
-  const result = [randomInt(1, 6), randomInt(1, 6)];
+  updateAndBroadcastState({
+    dice: [randomInt(1, 6), randomInt(1, 6)],
+  });
+}
 
-  mongo.state.findOneAndUpdate(
-    {},
-    {
-      $set: {
-        dice: result,
-      },
-    },
-    { returnDocument: 'after' }
-  ).then(doc => {
-    sendToAll(JSON.stringify({
-      event: 'state',
-      data: doc,
-    }));
-  }).catch(console.error);
+eventHandlers.changeBalance = function(ws, data) {
+  updateAndBroadcastState({
+    [`balance.${data.player}`]: data.value,
+  });
 }
 
 
@@ -103,6 +95,14 @@ function sendToAll(message) {
       client.send(message);
     }
   });
+}
+
+async function updateAndBroadcastState(query) {
+  const newState = await mongo.updateState(query);
+  sendToAll(JSON.stringify({
+    event: 'state',
+    data: newState,
+  }));
 }
 
 // function thisUser(ws) {

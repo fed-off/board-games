@@ -19,29 +19,59 @@ ws.addEventListener('message', function(event) {
   const message = JSON.parse(event.data);
   // Call function based on the event name if it exists
   if (typeof eventHandlers[message.event] === 'function') {
+    console.log(message.event, message.data);
     eventHandlers[message.event](message.data);
   } else {
     console.error('Unknown event:', message);
   }
 });
 
+// Helper function to send messages to the server
+function send(event, data = {}) {
+  ws.send(JSON.stringify({
+    event,
+    data,
+  }));
+}
 
-// == Event Handlers ==
-const eventHandlers = {};
-
-// === Dice ===
+// === Elements ===
 const diceBox = document.querySelector('div.zone-interface__dice-box');
 const diceValue = diceBox.querySelector('span.zone-interface__dice-number');
 const diceButton = diceBox.querySelector('button.zone-interface__dice');
 
+const balanceInputs = {
+  cat: document.querySelector('input.player__balance-value[data-player="cat"]'),
+  dog: document.querySelector('input.player__balance-value[data-player="dog"]'),
+  dino: document.querySelector('input.player__balance-value[data-player="dino"]'),
+  racer: document.querySelector('input.player__balance-value[data-player="racer"]'),
+};
+
+console.log(balanceInputs);
+
+
+// === Event Handlers ===
+const eventHandlers = {};
+
+// === State ===
+eventHandlers.state = function(data) {
+  diceValue.textContent = data.dice.join(' + ');
+  for (const player in data.balance) {
+    balanceInputs[player].value = data.balance[player];
+  }
+}
+
+
+// === Dice ===
 diceButton.addEventListener('click', function(event) {
-  ws.send(JSON.stringify({
-    event: 'rollDice',
-    data: {},
-  }));
+  send('rollDice');
 });
 
-eventHandlers.state = function(data) {
-  console.log('state: ', data);
-  diceValue.textContent = data.dice.join(' + ');
-}
+
+// === Balance ===
+document.querySelectorAll('input.player__balance-value').forEach(input =>
+  input.addEventListener('input', function(event) {
+    send('changeBalance', {
+      player: event.target.dataset.player,
+      value: event.target.value,
+    });
+}));
