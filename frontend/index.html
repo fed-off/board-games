@@ -13,58 +13,174 @@
       <div class="monopoly__container container">
 
         <!-- Элементы интерфейса SIDEBAR -->
-        <div class="monopoly__interface interface visually-hidden"> <!-- Убрать класс visually-hidden, чтобы вернуть интерфейс -->
+        <div class="monopoly__interface interface"> <!-- Убрать класс visually-hidden, чтобы вернуть интерфейс -->
+          <div class="interface__menu">
+            <button class="interface__button interface__button--rules" type="button" title="Правила">
+              <span class="visually-hidden">Правила</span>
+            </button>
+            <button class="interface__button interface__button--reset" type="button" title="Начать заново">
+              <span class="visually-hidden">Начать заново</span>
+            </button>
+          </div>
+
+
           <ul class="interface__chips">
-            <!-- Фигурка игрока 1 -->
-            <li class="interface__chip">
-              <button class="interface__chip interface__chip--1" type="button">
-                <span class="visually-hidden">фишка</span>
+            <!-- Фигурка игрока Барсик -->
+            <li class="interface__chip-item">
+              <button class="interface__chip interface__chip--cat" type="button" title="Барсик">
+                <span class="visually-hidden">Барсик</span>
               </button>
             </li>
 
-            <!-- Фигурка игрока 2 -->
-            <li class="interface__chip">
-              <button class="interface__chip interface__chip--2" type="button">
-                <span class="visually-hidden">фишка</span>
+            <!-- Фигурка игрока Шарик -->
+            <li class="interface__chip-item">
+              <button class="interface__chip interface__chip--dog" type="button" title="Шарик">
+                <span class="visually-hidden">Шарик</span>
               </button>
             </li>
 
-            <!-- Фигурка игрока 3 -->
-            <li class="interface__chip">
-              <button class="interface__chip interface__chip--3" type="button">
-                <span class="visually-hidden">фишка</span>
+            <!-- Фигурка игрока Тиранозавр -->
+            <li class="interface__chip-item">
+              <button class="interface__chip interface__chip--dino" type="button" title="Тиранозавр">
+                <span class="visually-hidden">Тиранозавр</span>
               </button>
             </li>
 
-            <!-- Фигурка игрока 4 -->
-            <li class="interface__chip">
-              <button class="interface__chip interface__chip--4" type="button">
-                <span class="visually-hidden">фишка</span>
+            <!-- Фигурка игрока Гонщик -->
+            <li class="interface__chip-item">
+              <button class="interface__chip interface__chip--racer" type="button" title="Гонщик">
+                <span class="visually-hidden">Гонщик</span>
               </button>
             </li>
           </ul>
 
 
-          <!-- Интерфейс отелей -->
-          <div class="interface__hotels-box">
-            <ul class="interface__hotels">
-              <!-- Дешёвый отель -->
-              <li class="interface__hotel-item">
-                <span class="interface__hotel-price visually-hidden">100</span>
-                <button class="interface__hotel interface__hotel--cheap" type="button">
-                  <span class="visually-hidden">Купить дешёвый отель</span>
-                </button>
-              </li>
-
-              <!-- Дорогой отель -->
-              <li class="interface__hotel-item">
-                <span class="interface__hotel-price visually-hidden">400</span>
-                <button class="interface__hotel interface__hotel--expensive" type="button">
-                  <span class="visually-hidden">Купить дорогой отель</span>
-                </button>
-              </li>
-            </ul>
+          <!--  Карточки  -->
+          <div class="interface__cards">
+            <div class="interface__card interface__card--chance" type="button" title="Карточка шанс">
+              <p class="interface__card-title"><b>Шанс</b></p>
+              <button class="interface__card-text" type="button">Нажми сюда</button>
+            </div>
+            <div class="interface__card interface__card--amnesty" type="button" title="Выход из тюрьмы">
+              <p class="interface__card-title"><b>Выход из тюрьмы</b></p>
+              <select class="interface__card-select">
+                <option value="nobody">Нет владельца</option>
+                <option value="cat">Барсик</option>
+                <option value="dog">Шарик</option>
+                <option value="dino">Тиранозавр</option>
+                <option value="racer">Гонщик</option>
+              </select>
+            </div>
           </div>
+
+
+          <!-- Домики -->
+          <ul class="interface__building-list">
+            <li class="interface__house-item">
+              <button class="interface__house" type="button" title="Домик">
+                <span class="visually-hidden">Домик</span>
+              </button>
+            </li>
+            <li class="interface__house-item">
+              <button class="interface__house" type="button" title="Домик">
+                <span class="visually-hidden">Домик</span>
+              </button>
+            </li>
+            <li class="interface__house-item">
+              <button class="interface__house" type="button" title="Домик">
+                <span class="visually-hidden">Домик</span>
+              </button>
+            </li>
+            <li class="interface__house-item">
+              <button class="interface__house" type="button" title="Домик">
+                <span class="visually-hidden">Домик</span>
+              </button>
+            </li>
+            <li class="interface__house-item">
+              <button class="interface__house" type="button" title="Домик">
+                <span class="visually-hidden">Домик</span>
+              </button>
+            </li>
+            <li class="interface__house-item">
+              <button class="interface__house" type="button" title="Домик">
+                <span class="visually-hidden">Домик</span>
+              </button>
+            </li>
+            <li class="interface__house-item">
+              <button class="interface__house" type="button" title="Домик">
+                <span class="visually-hidden">Домик</span>
+              </button>
+            </li>
+            <li class="interface__house-item">
+              <button class="interface__house" type="button" title="Домик">
+                <span class="visually-hidden">Домик</span>
+              </button>
+            </li>
+          </ul>
+
+          <!-- Отели -->
+          <ul class="interface__building-list">
+            <li class="interface__hotel-item">
+              <button class="interface__hotel" type="button" title="Отель">
+                <span class="visually-hidden">Отель</span>
+              </button>
+            </li>
+            <li class="interface__hotel-item">
+              <button class="interface__hotel" type="button" title="Отель">
+                <span class="visually-hidden">Отель</span>
+              </button>
+            </li>
+            <li class="interface__hotel-item">
+              <button class="interface__hotel" type="button" title="Отель">
+                <span class="visually-hidden">Отель</span>
+              </button>
+            </li>
+            <li class="interface__hotel-item">
+              <button class="interface__hotel" type="button" title="Отель">
+                <span class="visually-hidden">Отель</span>
+              </button>
+            </li>
+            <li class="interface__hotel-item">
+              <button class="interface__hotel" type="button" title="Отель">
+                <span class="visually-hidden">Отель</span>
+              </button>
+            </li>
+            <li class="interface__hotel-item">
+              <button class="interface__hotel" type="button" title="Отель">
+                <span class="visually-hidden">Отель</span>
+              </button>
+            </li>
+            <li class="interface__hotel-item">
+              <button class="interface__hotel" type="button" title="Отель">
+                <span class="visually-hidden">Отель</span>
+              </button>
+            </li>
+            <li class="interface__hotel-item">
+              <button class="interface__hotel" type="button" title="Отель">
+                <span class="visually-hidden">Отель</span>
+              </button>
+            </li>
+            <li class="interface__hotel-item">
+              <button class="interface__hotel" type="button" title="Отель">
+                <span class="visually-hidden">Отель</span>
+              </button>
+            </li>
+            <li class="interface__hotel-item">
+              <button class="interface__hotel" type="button" title="Отель">
+                <span class="visually-hidden">Отель</span>
+              </button>
+            </li>
+            <li class="interface__hotel-item">
+              <button class="interface__hotel" type="button" title="Отель">
+                <span class="visually-hidden">Отель</span>
+              </button>
+            </li>
+            <li class="interface__hotel-item">
+              <button class="interface__hotel" type="button" title="Отель">
+                <span class="visually-hidden">Отель</span>
+              </button>
+            </li>
+          </ul>
         </div>
 
 
@@ -162,9 +278,9 @@
                 <div class="zone-interface__dice-box">
                   <p class="zone-interface__dice-result">
                     <span>Результат: </span>
-                    <span class="zone-interface__dice-number">00</span>
+                    <span class="zone-interface__dice-number">0 + 0</span>
                   </p>
-                  <button class="zone-interface__dice" type="button">
+                  <button class="zone-interface__dice" type="button" title="Бросить  кости">
                     <span class="visually-hidden">Бросить кубик</span>
                   </button>
                 </div>
