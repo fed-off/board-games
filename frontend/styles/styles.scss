@@ -261,5 +261,247 @@ $big-gap: 40px;
   }
 }
 
+
+// _______________________ ЛЕВОЕ МЕНЮ
+.interface {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.1);
+
+
+  &__menu {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__button {                           // кнопки меню
+    width: 70px;
+    height: 70px;
+    padding: 10px;
+    border: 0;
+    border-radius: 50%;
+    background-color: transparent;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: 0.1s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &:active {
+      transform: scale(1.05);
+    }
+
+
+    &--rules {
+      background-image: url("../images/icons/rules-button.png");
+    }
+
+    &--reset {
+      background-image: url("../images/icons/reset-button.png");
+    }
+  }
+
+  &__chips {                              // фишки
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    gap: 10px;
+
+    li {
+      position: relative;
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  &__chip {                                // фишка
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    border: 0;
+    border-radius: 50%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: 0.1s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &:active {
+      transform: scale(1.05);
+    }
+
+    &--cat {
+      background-image: url("../images/icons/cat-chip.png");
+    }
+
+    &--dog {
+      background-image: url("../images/icons/dog-chip.png");
+    }
+
+    &--dino {
+      background-image: url("../images/icons/dino-chip.png");
+    }
+
+    &--racer {
+      background-image: url("../images/icons/racer-chip.png");
+    }
+  }
+
+
+
+  &__cards {                    // карточки
+    display: grid;
+    gap: 10px;
+    width: 100%;
+  }
+
+  &__card {                     // карточка
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    background-color: #9c7b55;
+
+    &-title {
+      font-size: 18px;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    &-text {
+      width: 100%;
+      padding: 5px;
+      font-size: 16px;
+      text-align: center;
+      border: 0;
+      border-radius: 10px;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.3);
+      transition: 0.1s;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+
+      &:active {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  &__card-select {
+    width: 100%;
+    padding: 5px;
+    font-size: 16px;
+    text-align: center;
+    appearance: none;
+    border: 0;
+    border-radius: 10px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: 0.1s;
+
+    option {
+      background-color: #9c7b55;
+    }
+
+    &:hover,
+    &:focus-visible {
+      transform: scale(1.1);
+    }
+  }
+
+
+  &__building-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  &__house-item {
+    position: relative;
+    width: 20px;
+    height: 20px;
+  }
+
+  &__house {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border: 0;
+    background-color: transparent;
+    background-image: url("../images/icons/house-button.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+    transition: 0.1s;
+
+    &:hover {
+      transform: scale(1.3);
+    }
+
+    &:active {
+      transform: scale(1.2);
+    }
+  }
+
+
+  &__hotel-item {
+    position: relative;
+    width: 30px;
+    height: 30px;
+  }
+
+  &__hotel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    border: 0;
+    background-color: transparent;
+    background-image: url("../images/icons/hotel-button.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+    transition: 0.1s;
+
+    &:hover {
+      transform: scale(1.3);
+    }
+
+    &:active {
+      transform: scale(1.2);
+    }
+  }
+}
+
 // _______________________
 // ' sass --watch ./frontend/styles/styles.scss:./frontend/styles/styles.css ' - команда для автоматической компиляции
