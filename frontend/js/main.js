@@ -46,8 +46,6 @@ const balanceInputs = {
   racer: document.querySelector('input.player__balance-value[data-player="racer"]'),
 };
 
-console.log(balanceInputs);
-
 
 // === Event Handlers ===
 const eventHandlers = {};
@@ -75,3 +73,47 @@ document.querySelectorAll('input.player__balance-value').forEach(input =>
       value: event.target.value,
     });
 }));
+
+
+// === Movable ===
+const movables = document.querySelectorAll('.movable');
+movables.forEach(movable => {
+  movable.addEventListener('mousedown', (event) => {
+    event.preventDefault();
+    // Calculate the offset from the mouse to the top-left corner of the element
+    let offsetX = event.clientX - movable.getBoundingClientRect().left;
+    let offsetY = event.clientY - movable.getBoundingClientRect().top;
+    // calculate the offset for parent top-left corner
+    const parentOffset = calculateParentOffset(movable);
+    offsetX += parentOffset.left;
+    offsetY += parentOffset.top;
+
+    function onMouseMove(event) {
+      movable.style.left = `${event.clientX - offsetX}px`;
+      movable.style.top = `${event.clientY - offsetY}px`;
+    }
+
+    function onMouseUp(event) {
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+    }
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+  });
+});
+
+
+// === Utils ===
+function calculateParentOffset(element) {
+  let top = 0;
+  let left = 0;
+
+  while (element.offsetParent) {
+      element = element.offsetParent;
+      top += element.offsetTop - element.scrollTop + element.clientTop;
+      left += element.offsetLeft - element.scrollLeft + element.clientLeft;
+  }
+
+  return { top, left };
+}

@@ -767,5 +767,10 @@ $big-gap: 40px;
   }
 }
 
+.movable {
+  position: absolute;
+  z-index: 10;
+}
+
 // _______________________
 // ' sass --watch ./frontend/styles/styles.scss:./frontend/styles/styles.css ' - команда для автоматической компиляции
