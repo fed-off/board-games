@@ -400,11 +400,11 @@ $big-gap: 40px;
       transition: 0.1s;
 
       &:hover {
-        transform: scale(1.1);
+        background-color: rgba(0, 0, 0, 0.4);
       }
 
       &:active {
-        transform: scale(1.05);
+        background-color: rgba(0, 0, 0, 0.5);
       }
     }
   }
@@ -428,7 +428,7 @@ $big-gap: 40px;
 
     &:hover,
     &:focus-visible {
-      transform: scale(1.1);
+      background-color: rgba(0, 0, 0, 0.4);
     }
   }
 
@@ -499,6 +499,270 @@ $big-gap: 40px;
 
     &:active {
       transform: scale(1.2);
+    }
+  }
+}
+
+
+//________________________ Доп инфа клеток
+.cell {                       // сетка внутри клетки
+  position: relative;
+  display: grid;
+
+  &--top {
+    grid-template-rows: 3.5fr 1fr;
+  }
+
+  &--bottom {
+    grid-template-rows: 1fr 3.5fr;
+  }
+
+  &--left {
+    grid-template-columns: 3.5fr 1fr;
+  }
+
+  &--right {
+    grid-template-columns: 1fr 3.5fr;
+  }
+
+
+  &__color {                   // цвет клетки, checkbox
+    appearance: none;
+    transition: 0.15s;
+    cursor: pointer;
+
+    &--brown {
+      &:checked {
+        box-shadow: 0 0 20px 5px #7f3300;
+      }
+      &:hover {
+        box-shadow: 0 0 20px 2px #7f3300;
+      }
+      &:active {
+        box-shadow: 0 0 20px #7f3300;
+      }
+    }
+
+    &--white {
+      &:checked {
+        box-shadow: 0 0 20px 5px #aff3ff;
+      }
+      &:hover {
+        box-shadow: 0 0 20px 2px #aff3ff;
+      }
+      &:active {
+        box-shadow: 0 0 20px #aff3ff;
+      }
+    }
+
+    &--purple {
+      &:checked {
+        box-shadow: 0 0 20px 5px #c170ff;
+      }
+      &:hover {
+        box-shadow: 0 0 20px 2px #c170ff;
+      }
+      &:active {
+        box-shadow: 0 0 20px #c170ff;
+      }
+    }
+
+    &--orange {
+      &:checked {
+        box-shadow: 0 0 20px 5px #ff6a00;
+      }
+      &:hover {
+        box-shadow: 0 0 20px 2px #ff6a00;
+      }
+      &:active {
+        box-shadow: 0 0 20px #ff6a00;
+      }
+    }
+
+    &--red {
+      &:checked {
+        box-shadow: 0 0 20px 5px #ff0008;
+      }
+      &:hover {
+        box-shadow: 0 0 20px 2px #ff0008;
+      }
+      &:active {
+        box-shadow: 0 0 20px #ff0008;
+      }
+    }
+
+    &--yellow {
+      &:checked {
+        box-shadow: 0 0 20px 5px #ffc10a;
+      }
+      &:hover {
+        box-shadow: 0 0 20px 2px #ffc10a;
+      }
+      &:active {
+        box-shadow: 0 0 20px #ffc10a;
+      }
+    }
+
+    &--green {
+      &:checked {
+        box-shadow: 0 0 20px 5px #75ff77;
+      }
+      &:hover {
+        box-shadow: 0 0 20px 2px #75ff77;
+      }
+      &:active {
+        box-shadow: 0 0 20px #75ff77;
+      }
+    }
+
+    &--blue {
+      &:checked {
+        box-shadow: 0 0 20px 5px #4953ff;
+      }
+      &:hover {
+        box-shadow: 0 0 20px 2px #4953ff;
+      }
+      &:active {
+        box-shadow: 0 0 20px #4953ff;
+      }
+    }
+  }
+
+
+  &:has(input[type="checkbox"]:checked) .cell__info {      // если чекбокс выбран
+    display: block;
+  }
+
+
+  &:has(option[value="cat"]:checked) .cell__card {      // если выбран владелец
+    mask-image: url("../images/icons/cat.png");
+    background-color: white;
+  }
+  &:has(option[value="dog"]:checked) .cell__card {
+    mask-image: url("../images/icons/dog.png");
+    background-color: white;
+  }
+  &:has(option[value="dino"]:checked) .cell__card {
+    mask-image: url("../images/icons/dino.png");
+    background-color: white;
+  }
+  &:has(option[value="racer"]:checked) .cell__card {
+    mask-image: url("../images/icons/racer.png");
+    background-color: white;
+  }
+
+  &__card {
+    mask-position: center;
+    mask-size: 70%;
+    mask-repeat: no-repeat;
+    opacity: 0.3;
+  }
+
+
+  &:has(input.cell__color--brown) .cell__info {     // подсветка модалки
+    box-shadow: 0 0 20px 5px #7f3300;
+  }
+  &:has(input.cell__color--white) .cell__info {
+    box-shadow: 0 0 20px 5px #aff3ff;
+  }
+  &:has(input.cell__color--purple) .cell__info {
+    box-shadow: 0 0 20px 5px #c170ff;
+  }
+  &:has(input.cell__color--orange) .cell__info {
+    box-shadow: 0 0 20px 5px #ff6a00;
+  }
+  &:has(input.cell__color--red) .cell__info {
+    box-shadow: 0 0 20px 5px #ff0008;
+  }
+  &:has(input.cell__color--yellow) .cell__info {
+    box-shadow: 0 0 20px 5px #ffc10a;
+  }
+  &:has(input.cell__color--green) .cell__info {
+    box-shadow: 0 0 20px 5px #75ff77;
+  }
+  &:has(input.cell__color--blue) .cell__info {
+    box-shadow: 0 0 20px 5px #4953ff;
+  }
+
+  &__info {
+    z-index: 2;
+    position: absolute;
+
+    &--bottom {
+      bottom: 110%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &--right {
+      top: 50%;
+      right: 110%;
+      transform: translateY(-50%);
+    }
+
+    &--left {
+      top: 50%;
+      left: 110%;
+      transform: translateY(-50%);
+    }
+
+    &--top {
+      top: 110%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    display: none;
+    width: 150%;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 10px;
+
+    &-text {
+      display: grid;
+      gap: 10px;
+
+      span {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+
+    &-building-house {
+      border-top: 1px solid white;
+      padding-top: 10px;
+    }
+
+    &-building-hotel {
+      border-bottom: 1px solid white;
+      padding-bottom: 10px;
+    }
+
+    &-player {
+      width: 100%;
+      padding: 5px;
+      margin-top: 10px;
+      font-size: 18px;
+      text-align: center;
+      appearance: none;
+      border: 0;
+      border-radius: 10px;
+      color: white;
+      background-color: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: 0.1s;
+
+      option {
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+
+      &:hover,
+      &:focus-visible {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
     }
   }
 }
