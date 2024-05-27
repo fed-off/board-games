@@ -84,6 +84,12 @@ eventHandlers.changeBalance = function(ws, data) {
 }
 
 
+eventHandlers.move = function(ws, data) {
+  updateAndBroadcastState({
+    [`position.${data.id}`]: {left: data.left, top: data.top},
+  });
+}
+
 
 // /**
 //  * Utils
