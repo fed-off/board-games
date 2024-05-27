@@ -51,10 +51,18 @@ const balanceInputs = {
 const eventHandlers = {};
 
 // === State ===
+let currentMovableId = null;
 eventHandlers.state = function(data) {
   diceValue.textContent = data.dice.join(' + ');
   for (const player in data.balance) {
     balanceInputs[player].value = data.balance[player];
+  }
+  for (const id in data.position) {
+    const movable = document.getElementById(id);
+    if (movable && movable.id !== currentMovableId) {
+      movable.style.left = `${data.position[id].left}vw`;
+      movable.style.top = `${data.position[id].top}vh`;
+    }
   }
 }
 
@@ -88,14 +96,24 @@ movables.forEach(movable => {
     offsetX += parentOffset.left;
     offsetY += parentOffset.top;
 
+    const id = event.target.id;
+    currentMovableId = id;
+
     function onMouseMove(event) {
-      movable.style.left = `${event.clientX - offsetX}px`;
-      movable.style.top = `${event.clientY - offsetY}px`;
+      const {x, y} = getMousePosition(event);
+      let left = x - offsetX; // px
+      let top = y - offsetY; // px
+      left = left / window.innerWidth * 100; // vw
+      top = top / window.innerHeight * 100; // vh
+      movable.style.left = `${left}vw`;
+      movable.style.top = `${top}vh`;
+      send('move', {id, left, top});
     }
 
     function onMouseUp(event) {
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
+      currentMovableId = null;
     }
 
     document.addEventListener('mousemove', onMouseMove);
@@ -116,4 +134,22 @@ function calculateParentOffset(element) {
   }
 
   return { top, left };
+}
+
+function getMousePosition(event) {
+  const PADDING = 50; // px
+
+  let x = event.clientX;
+  if (x < PADDING)
+    x = PADDING;
+  else if (x > window.innerWidth - PADDING)
+    x = window.innerWidth - PADDING;
+
+  let y = event.clientY;
+  if (y < PADDING)
+    y = PADDING;
+  else if (y > window.innerHeight - PADDING)
+    y = window.innerHeight - PADDING;
+
+  return {x, y};
 }
