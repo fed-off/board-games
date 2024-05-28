@@ -158,6 +158,23 @@ properties.forEach(property => {
   });
 });
 
+// === Property cards auto-close ===
+const propertyCheckboxes = document.querySelectorAll('input.cell__color');
+propertyCheckboxes.forEach(checkbox => {
+  checkbox.addEventListener('change', function(event) {
+    const openedCard = event.target;
+    if (!openedCard.checked) return;
+
+    function autoClose(event) {
+      if (event.target.closest('.cell__info')) return;
+      openedCard.checked = false;
+      document.removeEventListener('click', autoClose);
+    }
+
+    document.addEventListener('click', autoClose);
+  });
+});
+
 // === Utils ===
 function calculateParentOffset(element) {
   let top = 0;
