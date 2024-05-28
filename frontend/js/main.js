@@ -82,6 +82,13 @@ document.querySelectorAll('input.player__balance-value').forEach(input =>
     });
 }));
 
+// === Reset ===
+document.querySelector('button.interface__button--reset').addEventListener('click', function(event) {
+  if (confirm('Вы уверены что хотите сбросить игру?')) {
+    send('reset');
+  }
+});
+
 
 // === Movable ===
 const movables = document.querySelectorAll('.movable');

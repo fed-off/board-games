@@ -83,10 +83,24 @@ eventHandlers.changeBalance = function(ws, data) {
   });
 }
 
-
 eventHandlers.move = function(ws, data) {
   updateAndBroadcastState({
     [`position.${data.id}`]: {left: data.left, top: data.top},
+  });
+}
+
+eventHandlers.reset = function(ws, data) {
+  updateAndBroadcastState({
+    dice: [0, 0],
+    balance: { cat: 0, dog: 0, dino: 0, racer: 0 },
+    position: [
+      'chip-cat', 'chip-dog', 'chip-dino', 'chip-racer',
+      'house-1', 'house-2', 'house-3', 'house-4', 'house-5', 'house-6', 'house-7', 'house-8',
+      'hotel-1', 'hotel-2', 'hotel-3', 'hotel-4', 'hotel-5', 'hotel-6', 'hotel-7', 'hotel-8', 'hotel-9', 'hotel-10', 'hotel-11', 'hotel-12',
+    ].reduce((acc, id) => {
+      acc[id] = {left: 0, top: 0};
+      return acc;
+    }, {}),
   });
 }
 
