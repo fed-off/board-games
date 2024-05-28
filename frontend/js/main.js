@@ -38,6 +38,7 @@ function send(event, data = {}) {
 const diceBox = document.querySelector('div.zone-interface__dice-box');
 const diceValue = diceBox.querySelector('span.zone-interface__dice-number');
 const diceButton = diceBox.querySelector('button.zone-interface__dice');
+const chanceButton = document.querySelector('button.interface__card-text--chance');
 
 const balanceInputs = {
   cat: document.querySelector('input.player__balance-value[data-player="cat"]'),
@@ -54,6 +55,7 @@ const eventHandlers = {};
 let currentMovableId = null;
 eventHandlers.state = function(data) {
   diceValue.textContent = data.dice.join(' + ');
+  chanceButton.textContent = data.chance;
   for (const player in data.balance) {
     balanceInputs[player].value = data.balance[player];
   }
@@ -96,6 +98,10 @@ document.querySelector('button.interface__button--reset').addEventListener('clic
   }
 });
 
+// === Chance ===
+chanceButton.addEventListener('click', function(event) {
+  send('chance');
+});
 
 // === Movable ===
 const movables = document.querySelectorAll('.movable');

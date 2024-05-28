@@ -1,6 +1,6 @@
 const ws = require('ws');
 const mongo = require('./mongodb.js');
-// const { DEFAULT_BALANCE } = require('./constants.js');
+const { CHANCE_CARDS } = require('./constants.js');
 
 
 const PORT = process.env.WSPORT || 3001;
@@ -95,10 +95,17 @@ eventHandlers.changePropertyOwner = function(ws, data) {
   });
 }
 
+eventHandlers.chance = function(ws, data) {
+  updateAndBroadcastState({
+    chance: randomArrayElement(CHANCE_CARDS),
+  });
+}
+
 eventHandlers.reset = function(ws, data) {
   updateAndBroadcastState({
     dice: [0, 0],
     balance: { cat: 0, dog: 0, dino: 0, racer: 0 },
+    chance: 'Нажми сюда',
     position: [
       'chip-cat', 'chip-dog', 'chip-dino', 'chip-racer',
       'house-1', 'house-2', 'house-3', 'house-4', 'house-5', 'house-6', 'house-7', 'house-8',
@@ -146,4 +153,8 @@ async function updateAndBroadcastState(query) {
 
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function randomArrayElement(arr) {
+  return arr[randomInt(0, arr.length - 1)];
 }
