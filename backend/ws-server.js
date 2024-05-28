@@ -122,7 +122,7 @@ eventHandlers.reset = function(ws, data) {
       return acc;
     }, {}),
     property: [
-      'brown-1', 'brown-2', 'white-1', 'white-2', 'pink-1', 'pink-2', 'orange-1', 'orange-2',
+      'brown-1', 'brown-2', 'white-1', 'white-2', 'purple-1', 'purple-2', 'orange-1', 'orange-2',
       'red-1', 'red-2', 'yellow-1', 'yellow-2', 'green-1', 'green-2', 'blue-1', 'blue-2',
       'amnesty',
     ].reduce((acc, id) => {
