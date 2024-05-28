@@ -1,6 +1,6 @@
 const ws = require('ws');
 const mongo = require('./mongodb.js');
-const { CHANCE_CARDS } = require('./constants.js');
+const { CHANCE_CARDS, TRAIN_DESTINATIONS } = require('./constants.js');
 
 
 const PORT = process.env.WSPORT || 3001;
@@ -101,11 +101,18 @@ eventHandlers.chance = function(ws, data) {
   });
 }
 
+eventHandlers.train = function(ws, data) {
+  updateAndBroadcastState({
+    train: randomArrayElement(TRAIN_DESTINATIONS),
+  });
+}
+
 eventHandlers.reset = function(ws, data) {
   updateAndBroadcastState({
     dice: [0, 0],
     balance: { cat: 0, dog: 0, dino: 0, racer: 0 },
     chance: 'Нажми сюда',
+    train: 'Нажми сюда',
     position: [
       'chip-cat', 'chip-dog', 'chip-dino', 'chip-racer',
       'house-1', 'house-2', 'house-3', 'house-4', 'house-5', 'house-6', 'house-7', 'house-8',
