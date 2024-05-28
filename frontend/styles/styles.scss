@@ -51,7 +51,7 @@ body {
 }
 
 .container {
-  padding: 15px;
+  padding: 15px 3vw;
 }
 
 .overlay {
@@ -80,10 +80,24 @@ $big-gap: 40px;
 // BEM STYLES
 .monopoly__container {            // самый родительский блок
   display: flex;
-  gap: $big-gap;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 10px;
   height: 100vh;
 }
+
+.monopoly__zone-wrapper {            // обертка для зоны
+  position: relative;
+  flex-shrink: 0;
+}
+
+.monopoly__zone-img {               // изображение зоны
+  height: 100%;
+  width: 75vw;
+  background-color: red;
+  border-radius: 10px;
+}
+
+
 
 .monopoly__players {               // список игроков
   flex-shrink: 0;
@@ -161,20 +175,6 @@ $big-gap: 40px;
   }
 }
 
-
-
-
-.monopoly__zone-wrapper {            // обертка для зоны
-  position: relative;
-  flex-shrink: 0;
-}
-
-.monopoly__zone-img {               // изображение зоны
-  height: 100%;
-  object-fit: contain;
-  background-color: red;
-  border-radius: 10px;
-}
 
 .table {                            // внутренняя сетка поля
   z-index: 2;
@@ -268,7 +268,7 @@ $big-gap: 40px;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
 
   padding: 20px;
   border-radius: 10px;
@@ -311,9 +311,7 @@ $big-gap: 40px;
   }
 
   &__chips {                              // фишки
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    justify-items: center;
+    display: flex;
     gap: 10px;
 
     li {
