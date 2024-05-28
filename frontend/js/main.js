@@ -57,11 +57,18 @@ eventHandlers.state = function(data) {
   for (const player in data.balance) {
     balanceInputs[player].value = data.balance[player];
   }
+  // TODO: cache movable and property elements
   for (const id in data.position) {
     const movable = document.getElementById(id);
     if (movable && movable.id !== currentMovableId) {
       movable.style.left = `${data.position[id].left}vw`;
       movable.style.top = `${data.position[id].top}vh`;
+    }
+  }
+  for (const id in data.property) {
+    const property = document.getElementById(id);
+    if (property) {
+      property.value = data.property[id];
     }
   }
 }
@@ -128,6 +135,15 @@ movables.forEach(movable => {
   });
 });
 
+// === Property ===
+const properties = document.querySelectorAll('select.property');
+properties.forEach(property => {
+  property.addEventListener('change', (event) => {
+    const id = property.id;
+    const owner = property.value;
+    send('changePropertyOwner', {id, owner});
+  });
+});
 
 // === Utils ===
 function calculateParentOffset(element) {

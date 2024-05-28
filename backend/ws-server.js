@@ -89,6 +89,12 @@ eventHandlers.move = function(ws, data) {
   });
 }
 
+eventHandlers.changePropertyOwner = function(ws, data) {
+  updateAndBroadcastState({
+    [`property.${data.id}`]: data.owner,
+  });
+}
+
 eventHandlers.reset = function(ws, data) {
   updateAndBroadcastState({
     dice: [0, 0],
@@ -99,6 +105,14 @@ eventHandlers.reset = function(ws, data) {
       'hotel-1', 'hotel-2', 'hotel-3', 'hotel-4', 'hotel-5', 'hotel-6', 'hotel-7', 'hotel-8', 'hotel-9', 'hotel-10', 'hotel-11', 'hotel-12',
     ].reduce((acc, id) => {
       acc[id] = {left: 0, top: 0};
+      return acc;
+    }, {}),
+    property: [
+      'brown-1', 'brown-2', 'white-1', 'white-2', 'pink-1', 'pink-2', 'orange-1', 'orange-2',
+      'red-1', 'red-2', 'yellow-1', 'yellow-2', 'green-1', 'green-2', 'blue-1', 'blue-2',
+      'amnesty',
+    ].reduce((acc, id) => {
+      acc[id] = 'nobody';
       return acc;
     }, {}),
   });
