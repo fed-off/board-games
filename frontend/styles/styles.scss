@@ -173,6 +173,12 @@ $big-gap: 40px;
       -webkit-appearance: none;
     }
   }
+
+  &__balance-delta {
+    font-size: 20px;
+    display: inline-block;
+    width: 60px;
+  }
 }
 
 

@@ -78,9 +78,9 @@ eventHandlers.rollDice = function(ws, data) {
 }
 
 eventHandlers.changeBalance = function(ws, data) {
-  updateAndBroadcastState({
+  updateAndBroadcast('balance', {
     [`balance.${data.player}`]: data.value,
-  });
+  }, data);
 }
 
 eventHandlers.move = function(ws, data) {
@@ -153,11 +153,11 @@ async function updateAndBroadcastState(query) {
   }));
 }
 
-async function updateAndBroadcast(eventName, query) {
+async function updateAndBroadcast(eventName, query, data = null) {
   mongo.updateState(query); // don't wait for it
   sendToAll(JSON.stringify({
     event: eventName,
-    data: query,
+    data: data ?? query,
   }));
 }
 
