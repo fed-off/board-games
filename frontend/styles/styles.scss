@@ -177,7 +177,29 @@ $big-gap: 40px;
   &__balance-delta {
     font-size: 20px;
     display: inline-block;
-    width: 60px;
+    width: 70px;
+
+    &::before {
+      content: "";
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+      mask-image: url("../images/icons/balance-delta.png");
+      mask-size: 75% 100%;
+      mask-position: center;
+      mask-repeat: no-repeat;
+      background-color: transparent;
+    }
+
+    &--negative::before {
+      background-color: #ff0008;
+    }
+
+    &--positive::before {
+      background-color: #75ff77;
+      transform: rotate(180deg);
+    }
   }
 }
 

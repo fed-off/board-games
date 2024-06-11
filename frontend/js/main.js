@@ -103,8 +103,20 @@ function showBalanceDelta(player, newValue) {
   const oldValue = oldBalance[player];
   const delta = newValue - oldValue;
   const span = balanceDeltaSpans[player];
-  const icon = delta > 0 ? '▲' : '▼';
-  span.textContent = delta !== 0 ? `${icon}${Math.abs(delta)}` : '';
+  if (delta === 0) {
+    span.textContent = '';
+    span.classList.remove('player__balance-delta--positive');
+    span.classList.remove('player__balance-delta--negative');
+    return;
+  }
+  if (delta > 0) {
+    span.classList.add('player__balance-delta--positive');
+    span.classList.remove('player__balance-delta--negative');
+  } else {
+    span.classList.add('player__balance-delta--negative');
+    span.classList.remove('player__balance-delta--positive');
+  }
+  span.textContent = Math.abs(delta);
 }
 
 function resetBalanceDeltas() {
