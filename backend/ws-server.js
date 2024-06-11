@@ -72,7 +72,7 @@ function onMessage(ws, data) {
 const eventHandlers = {};
 
 eventHandlers.rollDice = function(ws, data) {
-  updateAndBroadcastState({
+  updateAndBroadcast('dice', {
     dice: [randomInt(1, 6), randomInt(1, 6)],
   });
 }
@@ -96,13 +96,13 @@ eventHandlers.changePropertyOwner = function(ws, data) {
 }
 
 eventHandlers.chance = function(ws, data) {
-  updateAndBroadcastState({
+  updateAndBroadcast('chance', {
     chance: randomArrayElement(CHANCE_CARDS),
   });
 }
 
 eventHandlers.train = function(ws, data) {
-  updateAndBroadcastState({
+  updateAndBroadcast('train', {
     train: randomArrayElement(TRAIN_DESTINATIONS),
   });
 }
@@ -150,6 +150,14 @@ async function updateAndBroadcastState(query) {
   sendToAll(JSON.stringify({
     event: 'state',
     data: newState,
+  }));
+}
+
+async function updateAndBroadcast(eventName, query) {
+  mongo.updateState(query); // don't wait for it
+  sendToAll(JSON.stringify({
+    event: eventName,
+    data: query,
   }));
 }
 

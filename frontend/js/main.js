@@ -83,6 +83,10 @@ diceButton.addEventListener('click', function(event) {
   send('rollDice');
 });
 
+eventHandlers.dice = function(data) {
+  animateText(diceValue, data.dice.join(' + '));
+}
+
 
 // === Balance ===
 document.querySelectorAll('input.player__balance-value').forEach(input =>
@@ -105,10 +109,18 @@ chanceButton.addEventListener('click', function(event) {
   send('chance');
 });
 
+eventHandlers.chance = function(data) {
+  animateText(chanceButton, data.chance);
+}
+
 // === Train ===
 trainButton.addEventListener('click', function(event) {
   send('train');
 });
+
+eventHandlers.train = function(data) {
+  animateText(trainButton, data.train);
+}
 
 // === Movable ===
 const movables = document.querySelectorAll('.movable');
@@ -205,4 +217,20 @@ function getMousePosition(event) {
     y = window.innerHeight - PADDING;
 
   return {x, y};
+}
+
+function animateText(element, text, duration = 1500) {
+  const delay = duration / text.length;
+  let index = 0;
+  element.textContent = '';
+
+  function typeCharacter() {
+    if (index < text.length) {
+      element.textContent += text[index];
+      index++;
+      setTimeout(typeCharacter, delay);
+    }
+  }
+
+  typeCharacter();
 }
