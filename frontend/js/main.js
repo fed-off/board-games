@@ -48,6 +48,13 @@ const balanceInputs = {
   racer: document.querySelector('input.player__balance-value[data-player="racer"]'),
 };
 
+const balanceDeltaSpans = {
+  cat: document.querySelector('span.player__balance-delta[data-player="cat"]'),
+  dog: document.querySelector('span.player__balance-delta[data-player="dog"]'),
+  dino: document.querySelector('span.player__balance-delta[data-player="dino"]'),
+  racer: document.querySelector('span.player__balance-delta[data-player="racer"]'),
+};
+
 
 // === Event Handlers ===
 const eventHandlers = {};
@@ -60,6 +67,7 @@ eventHandlers.state = function(data) {
   trainButton.textContent = data.train;
   for (const player in data.balance) {
     balanceInputs[player].value = data.balance[player];
+    oldBalance[player] = data.balance[player];
   }
   // TODO: cache movable and property elements
   for (const id in data.position) {
@@ -85,10 +93,41 @@ diceButton.addEventListener('click', function(event) {
 
 eventHandlers.dice = function(data) {
   animateText(diceValue, data.dice.join(' + '));
+  resetBalanceDeltas();
 }
 
 
 // === Balance ===
+const oldBalance = {};
+function showBalanceDelta(player, newValue) {
+  const oldValue = oldBalance[player];
+  const delta = newValue - oldValue;
+  const span = balanceDeltaSpans[player];
+  if (delta === 0) {
+    span.textContent = '';
+    span.classList.remove('player__balance-delta--positive');
+    span.classList.remove('player__balance-delta--negative');
+    return;
+  }
+  if (delta > 0) {
+    span.classList.add('player__balance-delta--positive');
+    span.classList.remove('player__balance-delta--negative');
+  } else {
+    span.classList.add('player__balance-delta--negative');
+    span.classList.remove('player__balance-delta--positive');
+  }
+  span.textContent = Math.abs(delta);
+}
+
+function resetBalanceDeltas() {
+  for (const player in balanceDeltaSpans) {
+    balanceDeltaSpans[player].textContent = '';
+  }
+  for (const player in balanceInputs) {
+    oldBalance[player] = balanceInputs[player].value;
+  }
+}
+
 document.querySelectorAll('input.player__balance-value').forEach(input =>
   input.addEventListener('input', function(event) {
     send('changeBalance', {
@@ -97,10 +136,16 @@ document.querySelectorAll('input.player__balance-value').forEach(input =>
     });
 }));
 
+eventHandlers.balance = function(data) {
+  balanceInputs[data.player].value = data.value;
+  showBalanceDelta(data.player, data.value);
+}
+
 // === Reset ===
 document.querySelector('button.interface__button--reset').addEventListener('click', function(event) {
   if (confirm('Вы уверены что хотите сбросить игру?')) {
     send('reset');
+    resetBalanceDeltas();
   }
 });
 
