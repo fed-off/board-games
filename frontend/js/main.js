@@ -122,6 +122,8 @@ function showBalanceDelta(player, newValue) {
 function resetBalanceDeltas() {
   for (const player in balanceDeltaSpans) {
     balanceDeltaSpans[player].textContent = '';
+    balanceDeltaSpans[player].classList.remove('player__balance-delta--positive');
+    balanceDeltaSpans[player].classList.remove('player__balance-delta--negative');
   }
   for (const player in balanceInputs) {
     oldBalance[player] = balanceInputs[player].value;
