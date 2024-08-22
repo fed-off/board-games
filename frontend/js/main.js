@@ -1,5 +1,5 @@
 // == WebSocket ==
-const ws = new WebSocket(`ws://${window.location.hostname}:3001`);
+const ws = new WebSocket(`wss://${window.location.hostname}:3002`);
 // Replace for development to connect to the remote server
 // const ws = new WebSocket(`ws://3.125.34.21:3001`);
 
